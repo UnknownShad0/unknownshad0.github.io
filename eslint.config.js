@@ -23,8 +23,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'react/jsx-uses-vars': 'error',
-      'no-unused-vars': ['error', { varsIgnorePattern: 'motion' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
 ]);

@@ -1,7 +1,5 @@
-import './App.css';
 import { Header, Footer } from './components';
-import DarkModeToggle from './components/DarkModeToggle';
-import { Hero, About, Technologies, Projects, Experience, Contact, Certifications } from './pages';
+import { Hero, About, Technologies, Projects, Experience, Certifications } from './pages';
 import coverImage from './assets/cover.jpg';
 
 function App() {

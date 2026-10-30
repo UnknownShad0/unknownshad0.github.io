@@ -1,5 +1,3 @@
-import { Typewriter } from 'react-simple-typewriter';
-
 export default function Hero() {
   return (
     <section className="text-center">

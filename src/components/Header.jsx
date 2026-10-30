@@ -1,21 +1,13 @@
-'use client';
-
 import { useState } from 'react';
-import { Dialog, DialogPanel, PopoverGroup } from '@headlessui/react';
+import { Dialog, DialogBackdrop, DialogPanel, PopoverGroup } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { NAVIGATION_ITEMS } from '../data/portfolio';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const menuItems = [
-    { name: 'About', link: '#about' },
-    { name: 'Education & Career', link: '#career' },
-    { name: 'Technologies', link: '#technologies' },
-    { name: 'Projects', link: '#projects' },
-    { name: 'Certifications', link: '#certifications' },
-  ];
 
   return (
-    <header className="bg-white">
+    <header id="top" className="bg-white">
       <nav aria-label="Global" className="mx-auto flex items-center p-6 lg:justify-center lg:px-8">
         <div className="flex lg:hidden">
           <button
@@ -28,37 +20,35 @@ export default function Header() {
           </button>
         </div>
         <PopoverGroup className="font-play hidden lg:flex lg:gap-x-12">
-          <a href="#about" className="text-sm/6 font-semibold text-gray-900">
-            About
-          </a>
-          <a href="#career" className="text-sm/6 font-semibold text-gray-900">
-            Education & Career
-          </a>
-          <a href="#technologies" className="text-sm/6 font-semibold text-gray-900">
-            Technologies
-          </a>
-          <a href="#projects" className="text-sm/6 font-semibold text-gray-900">
-            Projects
-          </a>
-          <a href="#certifications" className="text-sm/6 font-semibold text-gray-900">
-            Certifications
-          </a>
-          {/* <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Contact
-          </a> */}
+          {NAVIGATION_ITEMS.map((item) => (
+            <a
+              key={item.link}
+              href={item.link}
+              className="text-sm/6 font-semibold text-gray-900 transition-opacity hover:opacity-60 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4"
+            >
+              {item.name}
+            </a>
+          ))}
         </PopoverGroup>
       </nav>
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-        <div className="fixed inset-0 z-50" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+      <Dialog
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+        transition
+        className="relative z-50 transition duration-200 ease-out data-closed:opacity-0 lg:hidden"
+      >
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-black/20 transition-opacity duration-200 data-closed:opacity-0"
+        />
+        <DialogPanel
+          transition
+          className="fixed inset-y-0 right-0 w-full overflow-y-auto bg-white p-6 shadow-xl transition duration-300 ease-out data-closed:translate-x-full sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+        >
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              />
+            <a href="#top" className="-m-1.5 p-1.5">
+              <span className="sr-only">Back to the top</span>
+              <img alt="JM logo" src="/jm.png" className="h-8 w-auto" />
             </a>
             <button
               type="button"
@@ -72,7 +62,7 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {menuItems.map((item) => (
+                {NAVIGATION_ITEMS.map((item) => (
                   <a
                     key={item.link}
                     href={item.link}
