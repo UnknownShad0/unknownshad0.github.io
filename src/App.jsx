@@ -1,6 +1,5 @@
 import { Footer, Header, MouseEffects, Section } from './components';
 import { Hero, About, Technologies, Projects, Experience, Certifications } from './pages';
-import coverImage from './assets/cover.jpg';
 
 function App() {
   return (
@@ -8,17 +7,13 @@ function App() {
       <MouseEffects />
       <Header />
       <main>
-        <div className="relative mx-auto mb-10 lg:max-w-7xl">
+        <div className="mx-auto mb-8 max-w-sm p-4 sm:max-w-2xl lg:max-w-7xl">
           <Hero />
-          <img
-            src={coverImage}
-            alt=""
-            width="1560"
-            height="1170"
-            className="mx-auto h-auto rounded-3xl p-4 opacity-70"
-          />
         </div>
 
+        <Section className="rounded-2xl">
+          <Projects />
+        </Section>
         <Section className="rounded-3xl">
           <About />
         </Section>
@@ -27,9 +22,6 @@ function App() {
         </Section>
         <Section className="rounded-3xl">
           <Technologies />
-        </Section>
-        <Section className="rounded-2xl">
-          <Projects />
         </Section>
         <Section className="rounded-2xl">
           <Certifications />

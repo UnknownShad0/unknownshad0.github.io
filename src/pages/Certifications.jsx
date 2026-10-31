@@ -76,7 +76,7 @@ export default function Certifications() {
         aria-label="Certifications"
         tabIndex={0}
         onKeyDown={handleCarouselKeyDown}
-        className="mx-auto mt-8 rounded-3xl p-4 shadow-2xl sm:p-6 lg:p-8"
+        className="mx-auto mt-8 rounded-3xl border border-gray-200 bg-white p-4 shadow-2xl sm:p-6 lg:p-8"
       >
         <div className="overflow-hidden">
           <AnimatePresence initial={false} mode="wait" custom={direction}>
@@ -96,7 +96,7 @@ export default function Certifications() {
               onTap={() => openCertificate(activeCertificate)}
               aria-roledescription="slide"
               aria-label={`${activeCertificate.title}, certificate ${activeIndex + 1} of ${CERTIFICATIONS.length}.`}
-              className="group mx-auto block w-full cursor-grab active:cursor-grabbing lg:w-10/12 xl:w-4/5"
+              className="group mx-auto block w-full cursor-grab overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-md active:cursor-grabbing sm:p-3 lg:w-10/12 xl:w-4/5"
             >
               <img
                 src={activeCertificate.image}
@@ -105,13 +105,13 @@ export default function Certifications() {
                 height="1190"
                 loading="lazy"
                 decoding="async"
-                className="block h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.01]"
+                className="block h-auto w-full rounded-xl object-contain transition-transform duration-300 group-hover:scale-[1.01]"
               />
             </Motion.button>
           </AnimatePresence>
         </div>
 
-        <p className="mt-4 text-center font-semibold text-gray-900">{activeCertificate.title}</p>
+        {/* <p className="mt-4 text-center font-semibold text-gray-900">{activeCertificate.title}</p> */}
 
         <div className="mt-5 flex items-center justify-between gap-4">
           <button

@@ -4,7 +4,7 @@ import { NAVIGATION_ITEMS } from '../data/portfolio';
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="border-t border-gray-200 bg-white/90 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
           <div>

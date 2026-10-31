@@ -11,6 +11,32 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  position: relative;
+  min-width: 320px;
+  min-height: 100vh;
+  isolation: isolate;
+  background-color: #f5f8f7;
+}
+
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: '';
+}
+
+body::after {
+  background-image: url('/art-deco-pattern.svg');
+  background-position: center top;
+  background-size: 180px 208px;
+  opacity: 0.075;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+}
+
+#root {
+  position: relative;
 }
 
 html {
@@ -44,5 +70,12 @@ a {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body::after {
+    background-size: 140px auto;
+    opacity: 0.055;
   }
 }

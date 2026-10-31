@@ -6,14 +6,62 @@ import { NAVIGATION_ITEMS } from '../data/portfolio';
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const updateHeader = () => setIsScrolled(window.scrollY > 16);
+    const updateHeader = () => {
+      setIsScrolled(window.scrollY > 16);
+
+      if (window.scrollY < 80) {
+        setActiveSection('');
+      }
+    };
 
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
 
     return () => window.removeEventListener('scroll', updateHeader);
+  }, []);
+
+  useEffect(() => {
+    const sectionIds = NAVIGATION_ITEMS.map((item) => item.link.slice(1));
+    const sections = sectionIds
+      .map((sectionId) => document.getElementById(sectionId))
+      .filter(Boolean);
+
+    const updateFromHash = () => {
+      const sectionId = window.location.hash.slice(1);
+      if (sectionIds.includes(sectionId)) {
+        setActiveSection(sectionId);
+        window.requestAnimationFrame(() => {
+          document.getElementById(sectionId)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+        });
+      }
+    };
+
+    updateFromHash();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const currentSection = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((first, second) => first.boundingClientRect.top - second.boundingClientRect.top)[0];
+
+        if (currentSection) setActiveSection(currentSection.target.id);
+      },
+      {
+        rootMargin: '-28% 0px -62% 0px',
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    window.addEventListener('hashchange', updateFromHash);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('hashchange', updateFromHash);
+    };
   }, []);
 
   return (
@@ -38,15 +86,26 @@ export default function Header() {
           </button>
         </div>
         <PopoverGroup className="font-play hidden lg:flex lg:gap-x-12">
-          {NAVIGATION_ITEMS.map((item) => (
-            <a
-              key={item.link}
-              href={item.link}
-              className="hover:text-accent-hover rounded text-sm/6 font-semibold text-gray-900 transition-colors"
-            >
-              {item.name}
-            </a>
-          ))}
+          {NAVIGATION_ITEMS.map((item) => {
+            const sectionId = item.link.slice(1);
+            const isActive = activeSection === sectionId;
+
+            return (
+              <a
+                key={item.link}
+                href={item.link}
+                aria-current={isActive ? 'location' : undefined}
+                onClick={() => setActiveSection(sectionId)}
+                className={`relative rounded text-sm/6 font-semibold transition-colors after:absolute after:right-0 after:-bottom-1 after:left-0 after:h-0.5 after:origin-center after:rounded-full after:bg-teal-600 after:transition-transform after:duration-200 ${
+                  isActive
+                    ? 'text-accent after:scale-x-100'
+                    : 'hover:text-accent-hover text-gray-900 after:scale-x-0'
+                }`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
         </PopoverGroup>
       </nav>
       <Dialog
@@ -80,16 +139,29 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                {NAVIGATION_ITEMS.map((item) => (
-                  <a
-                    key={item.link}
-                    href={item.link}
-                    className="hover:text-accent-hover -mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 transition-colors hover:bg-gray-50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                {NAVIGATION_ITEMS.map((item) => {
+                  const sectionId = item.link.slice(1);
+                  const isActive = activeSection === sectionId;
+
+                  return (
+                    <a
+                      key={item.link}
+                      href={item.link}
+                      aria-current={isActive ? 'location' : undefined}
+                      className={`-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors ${
+                        isActive
+                          ? 'bg-teal-50 text-teal-800'
+                          : 'hover:text-accent-hover text-gray-900 hover:bg-gray-50'
+                      }`}
+                      onClick={() => {
+                        setActiveSection(sectionId);
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      {item.name}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

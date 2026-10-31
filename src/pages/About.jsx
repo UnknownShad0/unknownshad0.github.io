@@ -1,25 +1,14 @@
 import profile from '../assets/profile.jpg';
 import { FaDownload } from 'react-icons/fa';
-import { ReactTyped } from 'react-typed';
-import { motion as Motion, useReducedMotion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { SectionHeading } from '../components';
 import { MOTION_VARIANTS, DEFAULT_VIEWPORT, EASE_OUT } from '../config/motion';
 
-const aboutCopy = `
-  <p><strong class="font-semibold text-black">Motivated</strong> and <strong class="font-semibold text-black">resourceful</strong> with a strong commitment to <strong class="font-semibold text-black">professional growth</strong>. Experienced in balancing coursework with part-time employment, demonstrating exceptional <strong class="font-semibold text-black">time management</strong> and <strong class="font-semibold text-black">organizational skills</strong>.</p>
-  <p>Have a <strong class="font-semibold text-black">proactive mindset</strong> and actively look for opportunities to <strong class="font-semibold text-black">learn and contribute</strong> in the workplace. <strong class="font-semibold text-black">Adaptable</strong> and <strong class="font-semibold text-black">quick to learn</strong>, consistently achieving goals and <strong class="font-semibold text-black">exceeding expectations</strong>.</p>
-  <p>Seeking a position that allows for continued <strong class="font-semibold text-black">growth</strong> and <strong class="font-semibold text-black">development</strong> while making a meaningful <strong class="font-semibold text-black">contribution</strong> to the organization.</p>
-`;
-
-const typedAboutCopy = `<div class="space-y-4 text-base leading-relaxed text-gray-700">${aboutCopy}</div>`;
-
 export default function About() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <section id="about" className="p-4">
       <SectionHeading>About</SectionHeading>
-      <div className="mx-auto mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+      <div className="mx-auto mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <Motion.div
           variants={MOTION_VARIANTS.fade}
           initial="hidden"
@@ -30,7 +19,7 @@ export default function About() {
         >
           <div
             data-mouse-tilt
-            className="grid h-full min-w-0 grid-cols-1 gap-6 rounded-lg p-4 shadow-xl will-change-transform sm:p-6 md:grid-cols-2 md:items-center lg:gap-8"
+            className="grid h-full min-w-0 grid-cols-1 gap-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl will-change-transform sm:p-6 md:grid-cols-2 md:items-center lg:gap-8"
           >
             <div className="min-w-0">
               <img
@@ -88,16 +77,40 @@ export default function About() {
           whileInView="visible"
           viewport={DEFAULT_VIEWPORT}
           transition={{ duration: 0.65, delay: 0.1, ease: EASE_OUT }}
-          className="flex h-full items-center px-1 py-4 sm:px-6 sm:py-8 lg:p-10"
+          className="flex h-full items-center rounded-2xl border border-gray-200 bg-white p-5 shadow-xl sm:p-8 lg:p-10"
         >
-          {shouldReduceMotion ? (
-            <div
-              className="space-y-4 text-base leading-relaxed text-gray-700"
-              dangerouslySetInnerHTML={{ __html: aboutCopy }}
-            />
-          ) : (
-            <ReactTyped strings={[typedAboutCopy]} typeSpeed={5} showCursor={false} loop={false} />
-          )}
+          <div className="space-y-6 text-base leading-relaxed text-gray-700">
+            <div>
+              <p className="text-accent text-sm font-bold tracking-widest uppercase">How I work</p>
+              <h3 className="font-play mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
+                I start with the problem, not the programming language.
+              </h3>
+            </div>
+            <p>
+              I translate day-to-day business needs into straightforward web tools. That means
+              understanding the people, records, and decisions behind a workflow before deciding
+              what to build.
+            </p>
+            <p>
+              My experience spans both front-end and back-end development, API integration, user
+              documentation, and technical support. I focus on solutions that are practical for the
+              people who will actually use and maintain them.
+            </p>
+            <ul className="grid gap-3 text-sm sm:grid-cols-2">
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+                Simplify manual workflows
+              </li>
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+                Make information easier to act on
+              </li>
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+                Build responsive, usable interfaces
+              </li>
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+                Document systems for smooth handover
+              </li>
+            </ul>
+          </div>
         </Motion.div>
       </div>
     </section>
