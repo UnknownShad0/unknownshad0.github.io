@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="208" viewBox="0 0 180 208">
+  <g fill="none" stroke="#0f766e" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(45 52)">
+      <path d="M0-52 45-26 45 26 0 52-45 26-45-26Z" />
+      <path d="M-30 35V-18L0-35 30-18V35" />
+      <path d="M-15 35V-8L0-17 15-8V35" />
+    </g>
+    <g transform="translate(135 52)">
+      <path d="M0-52 45-26 45 26 0 52-45 26-45-26Z" />
+      <path d="M-30 35V-18L0-35 30-18V35" />
+      <path d="M-15 35V-8L0-17 15-8V35" />
+    </g>
+    <g transform="translate(0 156)">
+      <path d="M0-52 45-26 45 26 0 52-45 26-45-26Z" />
+      <path d="M-30 35V-18L0-35 30-18V35" />
+      <path d="M-15 35V-8L0-17 15-8V35" />
+    </g>
+    <g transform="translate(90 156)">
+      <path d="M0-52 45-26 45 26 0 52-45 26-45-26Z" />
+      <path d="M-30 35V-18L0-35 30-18V35" />
+      <path d="M-15 35V-8L0-17 15-8V35" />
+    </g>
+    <g transform="translate(180 156)">
+      <path d="M0-52 45-26 45 26 0 52-45 26-45-26Z" />
+      <path d="M-30 35V-18L0-35 30-18V35" />
+      <path d="M-15 35V-8L0-17 15-8V35" />
+    </g>
+  </g>
+</svg>
