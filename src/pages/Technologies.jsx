@@ -100,7 +100,7 @@ export default function Technologies() {
         The tools I use to turn requirements into responsive interfaces, connected workflows, and
         maintainable web applications.
       </p>
-      <div className="mx-auto mt-8 grid grid-cols-1 gap-6 rounded-3xl border border-gray-200 bg-white p-5 text-center shadow-2xl sm:grid-cols-2 sm:p-8 lg:grid-cols-3 lg:p-10">
+      <div className="mx-auto mt-8 flex flex-wrap justify-center gap-6 rounded-3xl border border-gray-200 bg-white p-5 text-center shadow-2xl sm:p-8 lg:p-10">
         {capabilityGroups.map((group) => (
           <Motion.div
             key={group.key}
@@ -109,7 +109,7 @@ export default function Technologies() {
             whileInView="visible"
             viewport={DEFAULT_VIEWPORT}
             transition={{ duration: 0.55, ease: EASE_OUT }}
-            className="group"
+            className="group w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
           >
             <div
               data-mouse-tilt

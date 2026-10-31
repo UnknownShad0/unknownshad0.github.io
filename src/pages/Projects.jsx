@@ -65,7 +65,7 @@ export default function Projects() {
         key={project.id}
         type="button"
         onClick={() => openGallery(project)}
-        className="group relative h-full rounded-2xl text-left transition-all duration-300 hover:-translate-y-1"
+        className="group relative h-full w-full rounded-2xl text-left transition-all duration-300 hover:-translate-y-1 md:w-[calc(50%-0.75rem)]"
         aria-label={`View ${project.title} case study`}
       >
         <div
@@ -136,14 +136,14 @@ export default function Projects() {
         <h3 className="font-play text-2xl font-bold text-gray-900 sm:text-3xl">
           Professional Projects
         </h3>
-        <Motion.div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <Motion.div className="mt-6 flex flex-wrap justify-center gap-6">
           {professionalProjects.map(renderProject)}
         </Motion.div>
 
         <h3 className="font-play mt-12 text-2xl font-bold text-gray-900 sm:text-3xl">
           Supporting Projects
         </h3>
-        <Motion.div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <Motion.div className="mt-6 flex flex-wrap justify-center gap-6">
           {supportingProjects.map(renderProject)}
         </Motion.div>
       </div>
