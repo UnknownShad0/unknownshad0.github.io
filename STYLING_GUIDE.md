@@ -68,34 +68,33 @@ shadows, or spacing. The project currently uses Tailwind's default design scale 
 | Borders         | `border-gray-200`, `bg-gray-300` | Cards, dividers, dots, and timeline connectors       |
 | Modal backdrop  | `bg-black/70`                    | Project and certificate overlays                     |
 | Mobile backdrop | `bg-black/20`                    | Mobile navigation overlay                            |
+| Accent          | `accent`, `accent-hover`         | Links, focus rings, markers, active dots, CTA        |
 
 ### Color character
 
-The palette is intentionally neutral. There is no persistent accent color for links, buttons, active
-states, or section identification. Interaction is communicated through movement, opacity, shadows,
-underlines, and changes between gray values.
+The palette remains intentionally neutral, with one deep-teal accent (`#0f766e`) and its hover shade
+(`#115e59`). The accent is restricted to link hover states, focus rings, timeline markers, active
+carousel pagination, and primary buttons. Interaction also uses movement, shadows, underlines, and
+changes between gray values.
 
 This works with the existing understated design, but it also means focus, hover, and active states
 must remain especially clear because color is not doing much of that work.
 
-### Contrast concern
+### Heading contrast
 
-Section headings use `opacity-25` on black text over white. This produces a very light gray with low
-contrast. The oversized type makes the headings visually recognizable, but opacity alone does not
-meet normal text contrast expectations. If accessibility becomes a priority, consider replacing
-`opacity-25` with a solid color such as `text-gray-400` or `text-gray-500` and verify the final
-contrast.
+Section headings use solid `text-gray-500` instead of opacity. This preserves their subdued editorial
+character while providing substantially stronger contrast against white.
 
 ## Typography
 
 ### Font roles
 
-| Role                                | Font                                 | Current treatment                    |
-| ----------------------------------- | ------------------------------------ | ------------------------------------ |
-| Section and navigation display text | Playfair Display                     | `.font-play`, generally bold         |
-| Body copy                           | Inter                                | Global `body` font                   |
-| Technology labels                   | Inter inside a `font-mono` container | Small labels paired with large icons |
-| Timeline details                    | Inter                                | Mostly `text-xs` with semibold dates |
+| Role                                | Font                                 | Current treatment                       |
+| ----------------------------------- | ------------------------------------ | --------------------------------------- |
+| Section and navigation display text | Playfair Display                     | `.font-play`, generally bold            |
+| Body copy                           | Inter                                | Global `body` font                      |
+| Technology labels                   | Inter inside a `font-mono` container | Small labels paired with large icons    |
+| Timeline details                    | Inter                                | `text-sm`, relaxed, with semibold dates |
 
 ### Type scale
 
@@ -106,7 +105,7 @@ The main section heading component uses:
 - Large screens: `lg:text-8xl`
 - Weight: `font-bold`
 - Alignment: centered
-- Opacity: 25%
+- Color: solid `text-gray-500`
 
 Other common sizes are:
 
@@ -115,14 +114,12 @@ Other common sizes are:
 - `text-lg` for card and category headings.
 - `text-base` for About copy.
 - `text-sm` for navigation, footer content, and labels.
-- `text-xs` for technology names, dates, timeline descriptions, counters, and helper text.
+- `text-xs` for technology names, counters, and helper text.
 
-### Font loading issue
+### Font weights
 
-The Google Fonts request loads Inter weights `400`, `500`, and `700`, but the UI frequently uses
-`font-semibold`, which maps to weight `600`. Browsers will synthesize that weight. To make typography
-more consistent across browsers, add Inter `600` to the font request or replace semibold usage with
-one of the loaded weights.
+The Google Fonts request loads Inter weights `400`, `500`, `600`, and `700`, matching the normal,
+medium, semibold, and bold utilities used throughout the interface.
 
 ## Layout system
 
@@ -226,10 +223,10 @@ Tailwind's default breakpoints are used:
 | Header         | Menu button and full-width slide-over | Same mobile navigation                   | Centered horizontal navigation at `lg`         |
 | Cover          | Fluid image with 1rem padding         | Fluid image                              | Maximum width of `7xl`                         |
 | About          | Profile card and copy stacked         | Profile/details split internally at `md` | Profile card and About copy become two columns |
-| Experience     | Education and career stacked          | Two columns beginning at `sm`            | Two wide timeline columns                      |
+| Experience     | Education and career stacked          | Two columns beginning at `md`            | Two wide timeline columns                      |
 | Technologies   | One category per row                  | Two category columns                     | Three category columns                         |
 | Projects       | One project per row                   | One project per row until `md`           | Two project columns                            |
-| Certifications | 4:3 carousel stage                    | 16:10 stage                              | Wide 16:10 stage                               |
+| Certifications | Full-width natural ratio              | Full-width natural ratio                 | Full-width natural ratio                       |
 | Footer         | One column                            | Two columns                              | Three columns                                  |
 
 ### Mobile-specific styling
@@ -242,11 +239,8 @@ Tailwind's default breakpoints are used:
 - Certificate slides support horizontal dragging.
 - The navigation panel occupies the full width below `sm` and caps at `max-w-sm` above it.
 
-### Responsive concern
-
-Experience changes to two columns at `sm` while the overall wrapper is only `max-w-2xl`. This can
-make the timeline cards narrow near 640px, especially for long career descriptions. Moving that
-split to `md` would give the timeline more breathing room without affecting the desktop design.
+Experience remains stacked through small screens and changes to two columns at `md`, giving timeline
+cards more width around the 640px breakpoint.
 
 ## Motion and interaction language
 
@@ -269,17 +263,19 @@ Shared motion settings include:
 
 ### Component motion
 
-| Area            | Motion behavior                                                     |
-| --------------- | ------------------------------------------------------------------- |
-| Mobile menu     | Backdrop fade and right-to-left panel slide                         |
-| About card      | Fade-in and slight hover lift                                       |
-| About copy      | Typewriter effect with a reduced-motion static fallback             |
-| Timeline        | Staggered right-to-left card entrances and slight hover lift        |
-| Technologies    | Left, fade, and right entrances by column                           |
-| Projects        | Staggered upward entrances and image hover zoom                     |
-| Project gallery | Direction-aware image transitions                                   |
-| Certifications  | Direction-aware carousel slide, drag gesture, and image hover scale |
-| Dialogs         | Backdrop fade and panel scale/fade                                  |
+| Area            | Motion behavior                                                                   |
+| --------------- | --------------------------------------------------------------------------------- |
+| Mobile menu     | Backdrop fade and right-to-left panel slide                                       |
+| About card      | Fade-in and slight hover lift                                                     |
+| About copy      | Typewriter effect with a reduced-motion static fallback                           |
+| Timeline        | Staggered right-to-left card entrances and slight hover lift                      |
+| Technologies    | Left, fade, and right entrances by column                                         |
+| Projects        | Staggered upward entrances and image hover zoom                                   |
+| Project gallery | Direction-aware image transitions                                                 |
+| Certifications  | Direction-aware carousel slide, drag gesture, and image hover scale               |
+| Dialogs         | Backdrop fade and panel scale/fade                                                |
+| Mouse effects   | Page-wide teal cursor halo, fading particle trail, and card tilt on fine pointers |
+| Card spotlight  | Cursor-position teal lighting on Technology and Project cards                    |
 
 ### Reduced motion
 
@@ -289,6 +285,8 @@ Reduced motion is handled in two layers:
 2. A global `prefers-reduced-motion` media query reduces CSS animations and transitions to 0.01ms.
 
 The About typewriter is replaced by fully rendered static text when reduced motion is enabled.
+The canvas trail and pointer-driven 3D tilt are not initialized when reduced motion is enabled or
+when the device does not expose a fine mouse pointer.
 
 This is one of the strongest parts of the current styling system.
 
@@ -296,10 +294,11 @@ This is one of the strongest parts of the current styling system.
 
 ### Header
 
-- White background and no persistent border or shadow.
+- Sticky white translucent background with backdrop blur.
+- A light bottom border and subtle shadow appear after scrolling.
 - Playfair Display is used for desktop navigation.
 - Desktop links are small, semibold, and spaced with `gap-x-12`.
-- Hover is communicated by reduced opacity.
+- Link hover is communicated by the deep-teal accent.
 - Mobile navigation uses a white slide-over panel with a light black backdrop.
 - Menu icons use the 24px Heroicons outline family.
 
@@ -308,21 +307,17 @@ The header is intentionally quiet so it does not compete with the cover image.
 ### Cover and Hero
 
 - The cover image is fluid, rounded with `rounded-3xl`, padded by 1rem, and displayed at 70% opacity.
-- A Hero section is positioned over the image, but its heading and call-to-action are currently
-  commented out.
-- This means the cover is visually decorative and the page currently has no visible primary `h1`.
-
-For stronger hierarchy and accessibility, a short visible name or role could be restored without
-changing the overall style.
+- The cover remains visually uncluttered with no overlaid text or button.
+- A screen-reader-only `h1` preserves the page's semantic name and role without changing the
+  original cover presentation.
 
 ### Section headings
 
 - Centralized through `SectionHeading`.
-- Use Playfair Display, bold weight, centered alignment, responsive scaling, and 25% opacity.
+- Use Playfair Display, bold weight, centered alignment, responsive scaling, and solid gray text.
 - Their large scale works as a recurring visual anchor.
 
-The heading treatment is consistent, but its low contrast is the clearest accessibility concern in
-the current visual system.
+The heading treatment remains intentionally subdued while using a readable solid color.
 
 ### About
 
@@ -335,32 +330,28 @@ the current visual system.
 - Important qualities are emphasized using semibold black text.
 - The original typewriter effect is preserved.
 
-The typewriter and static reduced-motion copy are maintained separately, so copy changes must be
-made in two places.
+The typewriter and static reduced-motion versions render from one shared HTML content source.
 
 ### Education and Career
 
 - The section is a large white panel with a subtle border and strong shadow.
 - Education and career use separate columns and matching timeline styling.
-- Circular gray-black markers are connected by a 2px gray line.
+- Circular deep-teal markers are connected by a 2px gray line.
 - Timeline cards use white backgrounds, `rounded-2xl`, responsive padding, and subtle hover lift.
-- Career descriptions use small bullet lists.
+- Career descriptions use relaxed `text-sm` bullet lists.
 - Education and career icons sit inside soft gray rounded boxes.
 
-The visual timeline is clear, although `text-xs` descriptions may be difficult to read on some
-devices.
+The timeline remains compact while keeping descriptions readable.
 
 ### Technologies
 
 - Three major category cards: Frontend, Backend, and Others.
-- Each category uses a rounded, shadowed container with a 5% hover scale.
+- Each category uses a rounded, shadowed container with a small upward hover lift.
 - Individual skills are white rounded tiles with a black icon and small black label.
 - Technology icons are visually dominant at `text-3xl`.
 - SQL uses a generic database icon and REST API uses a generic API icon.
 
-The technology section is one of the densest parts of the page. A 5% scale on large category cards
-is stronger than other hover movement and may feel inconsistent with the subtler 1% project and
-timeline treatments.
+The technology hover treatment now matches the small lift used by other cards.
 
 ### Projects
 
@@ -379,20 +370,20 @@ outward for a more spacious gallery presentation.
 
 - Uses a single-slide carousel instead of a multi-card grid.
 - The carousel inherits the full width of the section wrapper.
-- The image stage uses a light gray background, subtle border, and rounded corners.
-- Mobile uses a 4:3 stage; larger screens use 16:10.
+- The image stage has no additional background, border, padding, or shadow because the certificate
+  artwork already contains its own visual boundary.
 - Certificates use `object-contain` so their original proportions are preserved.
 - Navigation includes previous/next buttons, an announced counter, and active pagination dots.
 - Slides support keyboard arrows and horizontal dragging.
 - Clicking or tapping a slide opens a white modal panel.
 
-The carousel fits the mixed certificate dimensions better than equal-size cards. The caption row
-currently contains an empty secondary `<span>` and can be simplified.
+The carousel fits the mixed certificate dimensions better than equal-size cards. A simple title sits
+outside the image, avoiding a second frame around the certificate artwork.
 
 ### Footer
 
 - Uses a three-part information structure: Navigation, Resume, and Get in touch.
-- Text is small and neutral, with darker hover colors.
+- Text is small and neutral, with deep-teal link hover states.
 - The copyright area is separated by a light top border.
 - GitHub is the only social icon and uses a neutral gray treatment.
 - The footer follows the same `max-w-7xl` desktop alignment as the main content.
@@ -421,7 +412,7 @@ visual design.
 
 Current strengths include:
 
-- Visible focus outlines on most custom interactive controls.
+- Consistent deep-teal `ring-2` focus indicators with a two-pixel offset on all interactive controls.
 - Screen-reader labels for icon-only buttons.
 - Accessible dialogs with focus management and Escape-to-close behavior.
 - Keyboard navigation for galleries and the certificate carousel.
@@ -429,49 +420,27 @@ Current strengths include:
 - Touch-visible project descriptions.
 - Wrapping protection for long email addresses.
 
-Areas to improve include:
-
-- Increase section-heading contrast.
-- Restore a meaningful visible page-level `h1`.
-- Increase timeline description text from `text-xs` where space allows.
-- Add explicit focus styling to every text link for complete consistency.
-- Change the Technologies category headings from `h1` to lower-level headings so the visual and
-  semantic hierarchy match.
+The screen-reader `h1`, solid section headings, readable timeline copy, consistent focus rings, and
+`h3` technology category headings provide a clear semantic hierarchy while preserving the original
+cover design.
 
 ## Current inconsistencies and risks
 
-### High priority
-
-1. **Section-heading contrast:** `opacity-25` is visually subtle but too faint for important heading
-   text.
-2. **Missing primary heading:** the Hero `h1` is empty because its content is commented out.
-3. **Font-weight mismatch:** Inter 600 is used but not downloaded.
-
-### Medium priority
-
-1. **Tablet timeline density:** Experience becomes two columns at `sm`, which can make long timeline
-   cards narrow.
-2. **Small timeline copy:** career descriptions use `text-xs` even on large screens.
-3. **Hover-scale inconsistency:** Technology category cards scale to 105%, while most other cards use
-   much smaller movement.
-4. **Duplicated About copy:** the typewriter HTML and reduced-motion JSX can drift apart.
-5. **Repeated section wrappers:** `App.jsx` repeats similar maximum-width and margin classes, making
-   future styling changes easy to apply inconsistently.
-
-### Low priority
+### Remaining considerations
 
 1. The header uses `max-w-6xl` while content sections use `max-w-7xl`; this may be intentional but is
    not documented as a design decision.
-2. The certificate caption contains an empty secondary span.
-3. The palette has no accent color, so interactive states depend heavily on movement and gray-value
-   changes.
-4. Several components use arbitrary values such as `mb-[2%]` and negative outline offsets.
+2. About copy is stored as trusted internal HTML so the typewriter and static versions share one
+   source; future content should remain developer-controlled.
+3. Modal height limits use viewport-based arbitrary values because Tailwind's default scale has no
+   equivalent for this behavior.
 
 ## Rules for future styling changes
 
 To preserve the current design language:
 
-1. Keep the palette primarily white, black, and neutral gray.
+1. Keep the palette primarily white, black, and neutral gray, using deep teal only for defined
+   interaction states.
 2. Use Playfair Display only for navigation or display-level headings.
 3. Use Inter for body content, labels, dates, and controls.
 4. Reserve `rounded-3xl` for major containers and `rounded-xl` or `rounded-2xl` for inner cards.
@@ -484,10 +453,10 @@ To preserve the current design language:
 11. Use `object-cover` for portfolio screenshots and `object-contain` for documents or certificates.
 12. Test layouts at 320px, 375px, 640px, 768px, 1024px, and 1280px widths.
 
-## Suggested design tokens
+## Design tokens
 
-The project does not yet define custom tokens. If the styling grows, these conceptual tokens would
-capture the existing system:
+The accent colors are defined in `src/index.css` with Tailwind's `@theme`. The rest of the system uses
+Tailwind defaults:
 
 ```text
 Page background:       white
@@ -498,6 +467,8 @@ Subtle surface:        gray-50
 Border:                gray-200
 Timeline line:         gray-300
 Modal backdrop:        black at 70%
+Accent:                #0f766e
+Accent hover:          #115e59
 Major radius:          1.5rem (rounded-3xl)
 Card radius:           1rem (rounded-2xl)
 Image radius:          0.5rem (rounded-lg)
@@ -533,7 +504,6 @@ large display headings, rounded containers, image-led content, and subtle moveme
 together. The responsive behavior and reduced-motion support are stronger than a typical small
 portfolio project.
 
-The next styling improvements should focus on hierarchy and consistency rather than a redesign:
-increase heading contrast, restore a visible primary heading, load the font weights actually used,
-give the tablet timeline more width, and standardize hover intensity. These changes would improve
-readability and maintainability while preserving the original interface.
+The latest refinement improves typography, focus visibility, mobile timeline width, certificate
+presentation, and hover consistency while preserving the original interface. Future work can focus
+on asset optimization and automated interaction tests rather than visual redesign.

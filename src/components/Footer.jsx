@@ -12,7 +12,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm text-gray-600">
               {NAVIGATION_ITEMS.map((item) => (
                 <li key={item.link}>
-                  <a href={item.link} className="transition-colors hover:text-gray-900">
+                  <a href={item.link} className="hover:text-accent-hover rounded transition-colors">
                     {item.name}
                   </a>
                 </li>
@@ -27,7 +27,7 @@ export default function Footer() {
                 <a
                   href="/CV-Anunciado-March-2026.pdf"
                   download="Anunciado-CV-2026.pdf"
-                  className="inline-flex items-center gap-2 transition-colors hover:text-gray-900"
+                  className="hover:text-accent-hover inline-flex items-center gap-2 rounded transition-colors"
                 >
                   <ArrowDownTrayIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
                   Download CV
@@ -42,7 +42,7 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:johnmark.anunciado.dev@gmail.com"
-                  className="inline-flex min-w-0 items-start gap-2 transition-colors hover:text-gray-900"
+                  className="hover:text-accent-hover inline-flex min-w-0 items-start gap-2 rounded transition-colors"
                 >
                   <EnvelopeIcon aria-hidden="true" className="h-5 w-5 shrink-0 text-gray-400" />
                   <span className="break-all">johnmark.anunciado.dev@gmail.com</span>
@@ -61,7 +61,7 @@ export default function Footer() {
               href="https://github.com/unknownshad0"
               target="_blank"
               rel="noreferrer"
-              className="rounded text-gray-400 transition-colors hover:text-gray-600 focus-visible:outline-2 focus-visible:outline-offset-4"
+              className="hover:text-accent-hover rounded text-gray-400 transition-colors"
             >
               <span className="sr-only">GitHub</span>
               <FaGithub aria-hidden="true" className="h-6 w-6" />

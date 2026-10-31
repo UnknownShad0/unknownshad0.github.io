@@ -67,11 +67,16 @@ export default function Technologies() {
           whileInView="visible"
           viewport={DEFAULT_VIEWPORT}
           transition={{ duration: 0.55, ease: EASE_OUT }}
-          className="rounded-3xl p-4 shadow transition-all duration-300 hover:scale-105 hover:shadow-xl sm:p-5"
+          className="group"
         >
-          <h1 className="mb-5 text-lg font-semibold lg:text-2xl">Frontend</h1>
-          <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
-            {SKILLS.frontend.map(renderSkill)}
+          <div
+            data-mouse-tilt
+            className="mouse-spotlight relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
+          >
+            <h3 className="mb-5 text-lg font-semibold lg:text-2xl">Frontend</h3>
+            <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
+              {SKILLS.frontend.map(renderSkill)}
+            </div>
           </div>
         </Motion.div>
         <Motion.div
@@ -80,11 +85,16 @@ export default function Technologies() {
           whileInView="visible"
           viewport={DEFAULT_VIEWPORT}
           transition={{ duration: 0.55, ease: EASE_OUT }}
-          className="rounded-3xl p-4 shadow transition-all duration-300 hover:scale-105 hover:shadow-xl sm:p-5"
+          className="group"
         >
-          <h1 className="mb-5 text-lg font-semibold lg:text-2xl">Backend</h1>
-          <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
-            {SKILLS.backend.map(renderSkill)}
+          <div
+            data-mouse-tilt
+            className="mouse-spotlight relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
+          >
+            <h3 className="mb-5 text-lg font-semibold lg:text-2xl">Backend</h3>
+            <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
+              {SKILLS.backend.map(renderSkill)}
+            </div>
           </div>
         </Motion.div>
         <Motion.div
@@ -93,11 +103,16 @@ export default function Technologies() {
           whileInView="visible"
           viewport={DEFAULT_VIEWPORT}
           transition={{ duration: 0.55, ease: EASE_OUT }}
-          className="rounded-3xl p-4 shadow transition-all duration-300 hover:scale-105 hover:shadow-xl sm:col-span-2 sm:p-5 lg:col-span-1"
+          className="group sm:col-span-2 lg:col-span-1"
         >
-          <h1 className="mb-5 text-lg font-semibold lg:text-2xl">Others</h1>
-          <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
-            {SKILLS.other.map(renderSkill)}
+          <div
+            data-mouse-tilt
+            className="mouse-spotlight relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
+          >
+            <h3 className="mb-5 text-lg font-semibold lg:text-2xl">Others</h3>
+            <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
+              {SKILLS.other.map(renderSkill)}
+            </div>
           </div>
         </Motion.div>
       </div>

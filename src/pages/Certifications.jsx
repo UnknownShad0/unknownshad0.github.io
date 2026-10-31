@@ -76,9 +76,9 @@ export default function Certifications() {
         aria-label="Certifications"
         tabIndex={0}
         onKeyDown={handleCarouselKeyDown}
-        className="mx-auto mt-8 rounded-3xl p-4 shadow-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-800 sm:p-6 lg:p-8"
+        className="mx-auto mt-8 rounded-3xl p-4 shadow-2xl sm:p-6 lg:p-8"
       >
-        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-gray-50">
+        <div className="overflow-hidden">
           <AnimatePresence initial={false} mode="wait" custom={direction}>
             <Motion.button
               key={activeCertificate.id}
@@ -96,29 +96,28 @@ export default function Certifications() {
               onTap={() => openCertificate(activeCertificate)}
               aria-roledescription="slide"
               aria-label={`${activeCertificate.title}, certificate ${activeIndex + 1} of ${CERTIFICATIONS.length}.`}
-              className="group block w-full cursor-grab text-left focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-gray-800 active:cursor-grabbing"
+              className="group block w-full cursor-grab active:cursor-grabbing"
             >
-              <span className="flex aspect-[4/3] w-full items-center justify-center p-3 sm:aspect-[16/10] sm:p-6 lg:p-8">
-                <img
-                  src={activeCertificate.image}
-                  alt=""
-                  decoding="async"
-                  className="max-h-full max-w-full rounded-lg object-contain shadow-lg transition-transform duration-300 group-hover:scale-[1.01]"
-                />
-              </span>
-              <span className="block border-t border-gray-200 bg-white px-5 py-4 text-left sm:flex sm:items-center sm:justify-between">
-                <span className="block font-semibold text-gray-900">{activeCertificate.title}</span>
-                <span className="mt-1 block text-xs text-gray-500 sm:mt-0"></span>
-              </span>
+              <img
+                src={activeCertificate.image}
+                alt=""
+                width="1600"
+                height="1190"
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.01]"
+              />
             </Motion.button>
           </AnimatePresence>
         </div>
+
+        <p className="mt-4 text-center font-semibold text-gray-900">{activeCertificate.title}</p>
 
         <div className="mt-5 flex items-center justify-between gap-4">
           <button
             type="button"
             onClick={() => changeSlide(-1)}
-            className="rounded-full border border-gray-200 bg-white p-2.5 text-gray-700 shadow-sm transition hover:-translate-x-0.5 hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800"
+            className="rounded-full border border-gray-200 bg-white p-2.5 text-gray-700 shadow-sm transition-all duration-300 hover:-translate-x-0.5 hover:bg-gray-50"
             aria-label="Previous certificate"
           >
             <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
@@ -136,12 +135,16 @@ export default function Certifications() {
                   onClick={() => goToSlide(index)}
                   aria-label={`Show ${certificate.title}`}
                   aria-current={index === activeIndex ? 'true' : undefined}
-                  className={`h-2.5 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800 ${
-                    index === activeIndex
-                      ? 'w-8 bg-gray-800'
-                      : 'w-2.5 bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
+                  className="group flex h-8 w-8 items-center justify-center rounded-full"
+                >
+                  <span
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      index === activeIndex
+                        ? 'bg-accent w-8'
+                        : 'w-2.5 bg-gray-300 group-hover:bg-gray-400'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -149,7 +152,7 @@ export default function Certifications() {
           <button
             type="button"
             onClick={() => changeSlide(1)}
-            className="rounded-full border border-gray-200 bg-white p-2.5 text-gray-700 shadow-sm transition hover:translate-x-0.5 hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-800"
+            className="rounded-full border border-gray-200 bg-white p-2.5 text-gray-700 shadow-sm transition-all duration-300 hover:translate-x-0.5 hover:bg-gray-50"
             aria-label="Next certificate"
           >
             <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
@@ -167,15 +170,13 @@ export default function Certifications() {
             {selectedCertificate && (
               <DialogPanel
                 transition
-                className="relative w-full max-w-5xl rounded-2xl bg-white p-4 shadow-2xl transition duration-200 ease-out data-closed:scale-95 data-closed:opacity-0 sm:p-6"
+                className="relative w-full max-w-5xl transition duration-200 ease-out data-closed:scale-95 data-closed:opacity-0"
               >
-                <DialogTitle className="mb-4 pr-12 text-lg font-semibold text-gray-900">
-                  {selectedCertificate.title}
-                </DialogTitle>
+                <DialogTitle className="sr-only">{selectedCertificate.title}</DialogTitle>
                 <button
                   type="button"
                   onClick={closeCertificate}
-                  className="absolute top-2 right-2 rounded-full bg-white/90 p-1 text-gray-700 shadow transition hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="absolute top-2 right-2 rounded-full bg-white/90 p-1 text-gray-700 shadow transition-colors hover:text-black"
                   aria-label="Close certificate"
                 >
                   <XMarkIcon aria-hidden="true" className="h-7 w-7" />
@@ -183,7 +184,11 @@ export default function Certifications() {
                 <img
                   src={selectedCertificate.image}
                   alt={selectedCertificate.title}
-                  className="mx-auto max-h-[78vh] w-auto max-w-full rounded-lg object-contain"
+                  width="1600"
+                  height="1190"
+                  loading="lazy"
+                  decoding="async"
+                  className="mx-auto max-h-[85vh] w-auto max-w-full object-contain"
                 />
               </DialogPanel>
             )}

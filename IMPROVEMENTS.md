@@ -44,6 +44,21 @@
   and gallery controls now remain visible and reachable on touch-sized screens.
 - Replaced placeholder SQL and REST API icons with accurate generic icons, removed unused mappings,
   and standardized gallery controls on Heroicons.
+- Preserved the original cover-only Hero presentation with a screen-reader heading, solid
+  section-heading contrast, complete Inter font weights, and a restrained deep-teal interaction
+  accent.
+- Added consistent focus rings, sticky blurred navigation, readable timeline copy, and standardized
+  card hover movement.
+- Extracted repeated page wrappers, consolidated About copy, removed arbitrary spacing, and added
+  intrinsic image dimensions with lazy loading below the fold.
+- Removed the certificate carousel's duplicate frame, border, padding, and image shadow so the
+  certificate artwork displays without competing decoration.
+- Added an experimental desktop-only teal cursor glow, particle trail, and pointer-driven 3D tilt on
+  Technology and Project cards, with touch and reduced-motion safeguards.
+- Added cursor-position card spotlights using the existing motion and accessibility settings.
+- Expanded the cursor lighting into a soft page-wide ambient halo while keeping the effect
+  non-interactive and desktop-only.
+- Extended only the 3D tilt interaction to the About and Education/Career cards.
 
 ## Recommended next improvements
 

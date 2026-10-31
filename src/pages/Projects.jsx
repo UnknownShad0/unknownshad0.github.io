@@ -72,22 +72,31 @@ export default function Projects() {
               variants={MOTION_VARIANTS.slideUp}
               transition={{ duration: 0.5, ease: EASE_OUT }}
               onClick={() => openGallery(project)}
-              className="group relative overflow-hidden rounded-xl text-left shadow transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gray-800"
+              className="group relative rounded-xl text-left transition-all duration-300 hover:-translate-y-1"
               aria-label={`Open ${project.title} gallery`}
             >
-              <img
-                src={project.thumbnail}
-                alt=""
-                className="h-52 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 sm:h-64"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
-                <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
-                  <h3 className="mb-1 text-xl font-bold">{project.title}</h3>
-                  <p className="text-sm opacity-90">{project.category}</p>
+              <div
+                data-mouse-tilt
+                className="mouse-spotlight relative h-full overflow-hidden rounded-xl shadow transition-shadow duration-300 will-change-transform group-hover:shadow-2xl"
+              >
+                <img
+                  src={project.thumbnail}
+                  alt=""
+                  width="1917"
+                  height="1067"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-52 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 sm:h-64"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
+                  <div className="absolute right-0 bottom-0 left-0 p-4 text-white">
+                    <h3 className="mb-1 text-xl font-bold">{project.title}</h3>
+                    <p className="text-sm opacity-90">{project.category}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
-                {project.images.length} photos
+                <div className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+                  {project.images.length} photos
+                </div>
               </div>
             </Motion.button>
           ))}
@@ -115,7 +124,7 @@ export default function Projects() {
                 <button
                   type="button"
                   onClick={closeGallery}
-                  className="absolute top-2 right-2 z-20 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70 focus-visible:outline-2 focus-visible:outline-white sm:-top-12 sm:right-0 sm:bg-transparent sm:hover:bg-white/10"
+                  className="absolute top-2 right-2 z-20 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/70 sm:-top-12 sm:right-0 sm:bg-transparent sm:hover:bg-white/10"
                   aria-label="Close project gallery"
                 >
                   <XMarkIcon aria-hidden="true" className="h-7 w-7" />
@@ -126,7 +135,7 @@ export default function Projects() {
                     <button
                       type="button"
                       onClick={previousImage}
-                      className="absolute left-1 z-10 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-white sm:left-4 sm:p-3"
+                      className="absolute left-1 z-10 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 sm:left-4 sm:p-3"
                       aria-label="Previous image"
                     >
                       <ChevronLeftIcon aria-hidden="true" className="h-7 w-7" />
@@ -139,6 +148,10 @@ export default function Projects() {
                         key={selectedProject.images[currentImageIndex]}
                         src={selectedProject.images[currentImageIndex]}
                         alt={`${selectedProject.title}, image ${currentImageIndex + 1} of ${selectedProject.images.length}`}
+                        width="1917"
+                        height="1067"
+                        loading="lazy"
+                        decoding="async"
                         custom={direction}
                         initial={(nextDirection) => ({ opacity: 0, x: nextDirection * 28 })}
                         animate={{ opacity: 1, x: 0 }}
@@ -153,7 +166,7 @@ export default function Projects() {
                     <button
                       type="button"
                       onClick={nextImage}
-                      className="absolute right-1 z-10 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-white sm:right-4 sm:p-3"
+                      className="absolute right-1 z-10 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 sm:right-4 sm:p-3"
                       aria-label="Next image"
                     >
                       <ChevronRightIcon aria-hidden="true" className="h-7 w-7" />
@@ -186,7 +199,15 @@ export default function Projects() {
                             : 'border-transparent opacity-60 hover:opacity-100'
                         }`}
                       >
-                        <img src={image} alt="" className="h-full w-full object-cover" />
+                        <img
+                          src={image}
+                          alt=""
+                          width="64"
+                          height="64"
+                          loading="lazy"
+                          decoding="async"
+                          className="h-full w-full object-cover"
+                        />
                       </button>
                     ))}
                   </div>

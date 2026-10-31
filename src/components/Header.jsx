@@ -1,19 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, PopoverGroup } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { NAVIGATION_ITEMS } from '../data/portfolio';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateHeader = () => setIsScrolled(window.scrollY > 16);
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
+    return () => window.removeEventListener('scroll', updateHeader);
+  }, []);
 
   return (
-    <header id="top" className="bg-white">
-      <nav aria-label="Global" className="mx-auto flex items-center p-6 lg:justify-center lg:px-8">
+    <header
+      id="top"
+      className={`sticky top-0 z-40 border-b bg-white/90 backdrop-blur-md transition-all duration-300 ${
+        isScrolled ? 'border-gray-200 shadow-sm' : 'border-transparent'
+      }`}
+    >
+      <nav
+        aria-label="Global"
+        className="mx-auto flex max-w-sm items-center p-6 sm:max-w-3xl lg:max-w-6xl lg:justify-center lg:px-8"
+      >
         <div className="flex lg:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 transition-colors hover:text-gray-900"
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
@@ -24,7 +42,7 @@ export default function Header() {
             <a
               key={item.link}
               href={item.link}
-              className="text-sm/6 font-semibold text-gray-900 transition-opacity hover:opacity-60 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4"
+              className="hover:text-accent-hover rounded text-sm/6 font-semibold text-gray-900 transition-colors"
             >
               {item.name}
             </a>
@@ -46,14 +64,14 @@ export default function Header() {
           className="fixed inset-y-0 right-0 w-full overflow-y-auto bg-white p-6 shadow-xl transition duration-300 ease-out data-closed:translate-x-full sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
         >
           <div className="flex items-center justify-between">
-            <a href="#top" className="-m-1.5 p-1.5">
+            <a href="#top" className="-m-1.5 rounded p-1.5">
               <span className="sr-only">Back to the top</span>
-              <img alt="JM logo" src="/jm.png" className="h-8 w-auto" />
+              <img alt="JM logo" src="/jm.png" width="32" height="32" className="h-8 w-8" />
             </a>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 transition-colors hover:text-gray-900"
             >
               <span className="sr-only">Close menu</span>
               <XMarkIcon aria-hidden="true" className="size-6" />
@@ -66,7 +84,7 @@ export default function Header() {
                   <a
                     key={item.link}
                     href={item.link}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                    className="hover:text-accent-hover -mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 transition-colors hover:bg-gray-50"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
