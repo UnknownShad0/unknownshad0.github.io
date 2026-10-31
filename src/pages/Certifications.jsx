@@ -96,7 +96,7 @@ export default function Certifications() {
               onTap={() => openCertificate(activeCertificate)}
               aria-roledescription="slide"
               aria-label={`${activeCertificate.title}, certificate ${activeIndex + 1} of ${CERTIFICATIONS.length}.`}
-              className="group block w-full cursor-grab active:cursor-grabbing"
+              className="group mx-auto block w-full cursor-grab active:cursor-grabbing lg:w-10/12 xl:w-4/5"
             >
               <img
                 src={activeCertificate.image}

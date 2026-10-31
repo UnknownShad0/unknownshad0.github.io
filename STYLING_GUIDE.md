@@ -226,7 +226,7 @@ Tailwind's default breakpoints are used:
 | Experience     | Education and career stacked          | Two columns beginning at `md`            | Two wide timeline columns                      |
 | Technologies   | One category per row                  | Two category columns                     | Three category columns                         |
 | Projects       | One project per row                   | One project per row until `md`           | Two project columns                            |
-| Certifications | Full-width natural ratio              | Full-width natural ratio                 | Full-width natural ratio                       |
+| Certifications | Full-width natural ratio              | Full-width natural ratio                 | Reduced-width natural ratio                    |
 | Footer         | One column                            | Two columns                              | Three columns                                  |
 
 ### Mobile-specific styling
