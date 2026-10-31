@@ -77,7 +77,7 @@ export default function Projects() {
             >
               <div
                 data-mouse-tilt
-                className="mouse-spotlight relative h-full overflow-hidden rounded-xl shadow transition-shadow duration-300 will-change-transform group-hover:shadow-2xl"
+                className="relative h-full overflow-hidden rounded-xl shadow transition-shadow duration-300 will-change-transform group-hover:shadow-2xl"
               >
                 <img
                   src={project.thumbnail}

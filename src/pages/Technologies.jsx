@@ -71,7 +71,7 @@ export default function Technologies() {
         >
           <div
             data-mouse-tilt
-            className="mouse-spotlight relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
+            className="relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
           >
             <h3 className="mb-5 text-lg font-semibold lg:text-2xl">Frontend</h3>
             <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
@@ -89,7 +89,7 @@ export default function Technologies() {
         >
           <div
             data-mouse-tilt
-            className="mouse-spotlight relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
+            className="relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
           >
             <h3 className="mb-5 text-lg font-semibold lg:text-2xl">Backend</h3>
             <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
@@ -107,7 +107,7 @@ export default function Technologies() {
         >
           <div
             data-mouse-tilt
-            className="mouse-spotlight relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
+            className="relative h-full overflow-hidden rounded-3xl p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5"
           >
             <h3 className="mb-5 text-lg font-semibold lg:text-2xl">Others</h3>
             <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">

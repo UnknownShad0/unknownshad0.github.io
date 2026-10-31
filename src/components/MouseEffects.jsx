@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
 
-const ACCENT_RGB = '15, 118, 110';
+const CURSOR_RGB = '17, 24, 39';
 const MAX_PARTICLES = 70;
 const MAX_TRAIL_POINTS = 24;
 const POINTER_GLOW_RADIUS = 120;
@@ -52,8 +52,6 @@ export default function MouseEffects() {
 
       element.style.transition = 'transform 350ms ease-out';
       element.style.transform = '';
-      element.style.setProperty('--spotlight-x', '50%');
-      element.style.setProperty('--spotlight-y', '50%');
     };
 
     const updateTilt = (event) => {
@@ -73,8 +71,6 @@ export default function MouseEffects() {
       const rotateX = verticalPosition * -12;
       const rotateY = horizontalPosition * 12;
 
-      activeTiltElement.style.setProperty('--spotlight-x', `${horizontalPosition * 100 + 50}%`);
-      activeTiltElement.style.setProperty('--spotlight-y', `${verticalPosition * 100 + 50}%`);
       activeTiltElement.style.transition = 'transform 80ms ease-out';
       activeTiltElement.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
     };
@@ -107,7 +103,7 @@ export default function MouseEffects() {
       context.save();
       context.lineCap = 'round';
       context.lineJoin = 'round';
-      context.shadowColor = `rgba(${ACCENT_RGB}, 0.8)`;
+      context.shadowColor = `rgba(${CURSOR_RGB}, 0.8)`;
       context.shadowBlur = 18;
 
       for (let index = 1; index < trail.length; index += 1) {
@@ -118,7 +114,7 @@ export default function MouseEffects() {
         context.beginPath();
         context.moveTo(previousPoint.x, previousPoint.y);
         context.lineTo(point.x, point.y);
-        context.strokeStyle = `rgba(${ACCENT_RGB}, ${opacity})`;
+        context.strokeStyle = `rgba(${CURSOR_RGB}, ${opacity})`;
         context.lineWidth = Math.max(1, point.life * 5);
         context.stroke();
       }
@@ -145,8 +141,8 @@ export default function MouseEffects() {
           0,
           Math.PI * 2
         );
-        context.fillStyle = `rgba(${ACCENT_RGB}, ${particle.life * 0.8})`;
-        context.shadowColor = `rgba(${ACCENT_RGB}, 0.9)`;
+        context.fillStyle = `rgba(${CURSOR_RGB}, ${particle.life * 0.8})`;
+        context.shadowColor = `rgba(${CURSOR_RGB}, 0.9)`;
         context.shadowBlur = 14;
         context.fill();
       });
@@ -165,10 +161,10 @@ export default function MouseEffects() {
         pointer.y,
         POINTER_GLOW_RADIUS
       );
-      gradient.addColorStop(0, `rgba(${ACCENT_RGB}, 0.16)`);
-      gradient.addColorStop(0.35, `rgba(${ACCENT_RGB}, 0.09)`);
-      gradient.addColorStop(0.7, `rgba(${ACCENT_RGB}, 0.035)`);
-      gradient.addColorStop(1, `rgba(${ACCENT_RGB}, 0)`);
+      gradient.addColorStop(0, `rgba(${CURSOR_RGB}, 0.16)`);
+      gradient.addColorStop(0.35, `rgba(${CURSOR_RGB}, 0.09)`);
+      gradient.addColorStop(0.7, `rgba(${CURSOR_RGB}, 0.035)`);
+      gradient.addColorStop(1, `rgba(${CURSOR_RGB}, 0)`);
 
       context.beginPath();
       context.arc(pointer.x, pointer.y, POINTER_GLOW_RADIUS, 0, Math.PI * 2);
@@ -208,8 +204,6 @@ export default function MouseEffects() {
       if (activeTiltElement) {
         activeTiltElement.style.transition = '';
         activeTiltElement.style.transform = '';
-        activeTiltElement.style.removeProperty('--spotlight-x');
-        activeTiltElement.style.removeProperty('--spotlight-y');
       }
     };
   }, [shouldReduceMotion]);
