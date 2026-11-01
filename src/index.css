@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-accent: #0f766e;
   --color-accent-hover: #115e59;
@@ -16,6 +18,10 @@ body {
   min-height: 100vh;
   isolation: isolate;
   background-color: #f5f8f7;
+  color: #111827;
+  transition:
+    background-color 280ms ease,
+    color 280ms ease;
 }
 
 body::after {
@@ -33,6 +39,23 @@ body::after {
   opacity: 0.075;
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
   mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+}
+
+html.dark body {
+  background-color: #07110f;
+  color: #e7eeeb;
+}
+
+html.dark body::after {
+  opacity: 0.14;
+}
+
+:root {
+  --cursor-rgb: 17, 24, 39;
+}
+
+:root.dark {
+  --cursor-rgb: 45, 212, 191;
 }
 
 #root {
@@ -56,6 +79,62 @@ a {
   :where(a, button, [role='button'], [tabindex='0']):focus-visible {
     @apply ring-accent ring-2 ring-offset-2 outline-none;
   }
+
+  .dark :where(a, button, [role='button'], [tabindex='0']):focus-visible {
+    --tw-ring-color: #5eead4;
+    --tw-ring-offset-color: #07110f;
+  }
+}
+
+.theme-orb {
+  position: relative;
+  display: block;
+  width: 1.35rem;
+  height: 1.35rem;
+  overflow: hidden;
+  border: 1px solid rgb(15 118 110 / 35%);
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #f8faf9 0 50%, #12352f 50% 100%);
+  box-shadow:
+    inset -3px -2px 5px rgb(3 20 17 / 28%),
+    0 0 0 4px rgb(15 118 110 / 8%);
+}
+
+.theme-orb::after {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.25rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 75%);
+  content: '';
+  filter: blur(0.5px);
+}
+
+[data-theme-mode='light'] .theme-orb {
+  border-color: rgb(15 118 110 / 28%);
+  background: #f5fbf9;
+  box-shadow:
+    inset -3px -3px 7px rgb(15 118 110 / 12%),
+    0 0 0 4px rgb(15 118 110 / 8%);
+}
+
+[data-theme-mode='dark'] .theme-orb {
+  border-color: rgb(45 212 191 / 42%);
+  background: #12352f;
+  box-shadow:
+    inset -3px -3px 7px rgb(0 0 0 / 38%),
+    0 0 0 4px rgb(45 212 191 / 9%),
+    0 0 14px rgb(45 212 191 / 18%);
+}
+
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow !important;
+  transition-duration: 280ms !important;
+  transition-timing-function: ease !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

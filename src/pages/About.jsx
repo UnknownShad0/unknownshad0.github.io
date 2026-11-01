@@ -19,7 +19,7 @@ export default function About() {
         >
           <div
             data-mouse-tilt
-            className="grid h-full min-w-0 grid-cols-1 gap-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl will-change-transform sm:p-6 md:grid-cols-2 md:items-center lg:gap-8"
+            className="grid h-full min-w-0 grid-cols-1 gap-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl will-change-transform sm:p-6 md:grid-cols-2 md:items-center lg:gap-8 dark:border-teal-100/10 dark:bg-[#0e1c18] dark:shadow-black/25"
           >
             <div className="min-w-0">
               <img
@@ -47,7 +47,7 @@ export default function About() {
                   <dd>
                     <a
                       href="mailto:johnmark.anunciado.dev@gmail.com"
-                      className="hover:text-accent-hover rounded break-words transition-colors hover:underline"
+                      className="hover:text-accent-hover rounded break-words transition-colors hover:underline dark:hover:text-teal-300"
                     >
                       johnmark.anunciado.dev@gmail.com
                     </a>
@@ -61,7 +61,7 @@ export default function About() {
                   <a
                     href="/CV-Anunciado-March-2026.pdf"
                     download="Anunciado-CV-2026.pdf"
-                    className="hover:text-accent-hover inline-flex items-center gap-2 rounded text-sm font-semibold transition-colors hover:underline"
+                    className="hover:text-accent-hover inline-flex items-center gap-2 rounded text-sm font-semibold transition-colors hover:underline dark:hover:text-teal-300"
                   >
                     <span>Download CV</span>
                     <FaDownload aria-hidden="true" className="text-lg" />
@@ -77,12 +77,14 @@ export default function About() {
           whileInView="visible"
           viewport={DEFAULT_VIEWPORT}
           transition={{ duration: 0.65, delay: 0.1, ease: EASE_OUT }}
-          className="flex h-full items-center rounded-2xl border border-gray-200 bg-white p-5 shadow-xl sm:p-8 lg:p-10"
+          className="flex h-full items-center rounded-2xl border border-gray-200 bg-white p-5 shadow-xl sm:p-8 lg:p-10 dark:border-teal-100/10 dark:bg-[#0e1c18] dark:shadow-black/25"
         >
-          <div className="space-y-6 text-base leading-relaxed text-gray-700">
+          <div className="space-y-6 text-base leading-relaxed text-gray-700 dark:text-gray-300">
             <div>
-              <p className="text-accent text-sm font-bold tracking-widest uppercase">How I work</p>
-              <h3 className="font-play mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
+              <p className="text-accent text-sm font-bold tracking-widest uppercase dark:text-teal-300">
+                How I work
+              </p>
+              <h3 className="font-play mt-3 text-3xl font-bold text-gray-900 sm:text-4xl dark:text-gray-50">
                 I start with the problem, not the programming language.
               </h3>
             </div>
@@ -97,16 +99,16 @@ export default function About() {
               people who will actually use and maintain them.
             </p>
             <ul className="grid gap-3 text-sm sm:grid-cols-2">
-              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm dark:bg-white/5 dark:text-gray-200 dark:ring-1 dark:ring-white/5">
                 Simplify manual workflows
               </li>
-              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm dark:bg-white/5 dark:text-gray-200 dark:ring-1 dark:ring-white/5">
                 Make information easier to act on
               </li>
-              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm dark:bg-white/5 dark:text-gray-200 dark:ring-1 dark:ring-white/5">
                 Build responsive, usable interfaces
               </li>
-              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm">
+              <li className="rounded-xl bg-white p-4 font-semibold text-gray-800 shadow-sm dark:bg-white/5 dark:text-gray-200 dark:ring-1 dark:ring-white/5">
                 Document systems for smooth handover
               </li>
             </ul>

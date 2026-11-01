@@ -70,7 +70,7 @@ export default function Projects() {
       >
         <div
           data-mouse-tilt
-          className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow transition-shadow duration-300 will-change-transform group-hover:shadow-2xl"
+          className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow transition-shadow duration-300 will-change-transform group-hover:shadow-2xl dark:border-teal-100/10 dark:bg-[#0e1c18] dark:shadow-black/20 dark:group-hover:shadow-black/40"
         >
           <div className="relative overflow-hidden">
             {project.thumbnail ? (
@@ -93,28 +93,32 @@ export default function Projects() {
                 </div>
               </div>
             )}
-            <div className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold">
+            <div className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold dark:bg-[#0b1714]/90 dark:text-gray-100">
               {project.year ?? project.category}
             </div>
           </div>
 
           <div className="flex flex-1 flex-col p-5 sm:p-6">
-            <h4 className="text-2xl font-bold text-gray-900">{project.title}</h4>
+            <h4 className="text-2xl font-bold text-gray-900 dark:text-gray-50">{project.title}</h4>
             {project.workType && (
-              <p className="mt-3 w-fit rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">
+              <p className="mt-3 w-fit rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800 dark:bg-teal-300/10 dark:text-teal-200">
                 {project.workType}
               </p>
             )}
-            <p className="mt-2 leading-relaxed text-gray-600">{project.headline}</p>
+            <p className="mt-2 leading-relaxed text-gray-600 dark:text-gray-400">
+              {project.headline}
+            </p>
 
             <div className="mt-5 border-l-4 border-teal-600 pl-4">
-              <p className="text-xs font-bold tracking-wider text-gray-500 uppercase">
+              <p className="text-xs font-bold tracking-wider text-gray-500 uppercase dark:text-gray-500">
                 Business value
               </p>
-              <p className="mt-1 text-sm leading-relaxed text-gray-800">{project.value}</p>
+              <p className="mt-1 text-sm leading-relaxed text-gray-800 dark:text-gray-300">
+                {project.value}
+              </p>
             </div>
 
-            <span className="text-accent mt-6 inline-flex items-center gap-2 text-sm font-bold">
+            <span className="text-accent mt-6 inline-flex items-center gap-2 text-sm font-bold dark:text-teal-300">
               View case study
               <ChevronRightIcon aria-hidden="true" className="h-4 w-4" />
             </span>
@@ -127,20 +131,20 @@ export default function Projects() {
   return (
     <section id="projects" className="p-4">
       <SectionHeading>Selected Work</SectionHeading>
-      <p className="mx-auto mt-5 max-w-3xl text-center leading-relaxed text-gray-600">
+      <p className="mx-auto mt-5 max-w-3xl text-center leading-relaxed text-gray-600 dark:text-gray-400">
         Professional work first, followed by selected academic projects. Each case study explains
         the problem, my contribution, and the practical value of the solution.
       </p>
 
-      <div className="mx-auto mt-8 rounded-3xl border border-white/70 bg-white/75 p-4 shadow-2xl backdrop-blur-sm sm:p-8 lg:p-10">
-        <h3 className="font-play text-2xl font-bold text-gray-900 sm:text-3xl">
+      <div className="mx-auto mt-8 rounded-3xl border border-white/70 bg-white/75 p-4 shadow-2xl backdrop-blur-sm sm:p-8 lg:p-10 dark:border-teal-100/10 dark:bg-[#0b1714]/90 dark:shadow-black/30">
+        <h3 className="font-play text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-50">
           Professional Projects
         </h3>
         <Motion.div className="mt-6 flex flex-wrap justify-center gap-6">
           {professionalProjects.map(renderProject)}
         </Motion.div>
 
-        <h3 className="font-play mt-12 text-2xl font-bold text-gray-900 sm:text-3xl">
+        <h3 className="font-play mt-12 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-50">
           Supporting Projects
         </h3>
         <Motion.div className="mt-6 flex flex-wrap justify-center gap-6">
@@ -164,7 +168,7 @@ export default function Projects() {
             {selectedProject && (
               <DialogPanel
                 transition
-                className="relative w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-gray-900 shadow-2xl transition duration-200 ease-out data-closed:scale-95 data-closed:opacity-0"
+                className="relative w-full max-w-5xl transform overflow-hidden rounded-2xl bg-white text-gray-900 shadow-2xl transition duration-200 ease-out data-closed:scale-95 data-closed:opacity-0 dark:bg-[#0b1714] dark:text-gray-100 dark:ring-1 dark:shadow-black/50 dark:ring-teal-100/10"
               >
                 <button
                   type="button"
@@ -222,54 +226,62 @@ export default function Projects() {
                 )}
 
                 <div className="p-5 sm:p-8">
-                  <p className="text-accent text-xs font-bold tracking-widest uppercase">
+                  <p className="text-accent text-xs font-bold tracking-widest uppercase dark:text-teal-300">
                     {selectedProject.category}
                     {selectedProject.workType && ` · ${selectedProject.workType}`}
                   </p>
                   <DialogTitle className="mt-2 text-2xl font-bold sm:text-3xl">
                     {selectedProject.title}
                   </DialogTitle>
-                  <p className="mt-2 text-lg leading-relaxed text-gray-600">
+                  <p className="mt-2 text-lg leading-relaxed text-gray-600 dark:text-gray-400">
                     {selectedProject.headline}
                   </p>
 
                   <dl className="mt-7 grid gap-5 sm:grid-cols-2">
-                    <div className="rounded-xl bg-gray-50 p-5">
-                      <dt className="text-sm font-bold text-gray-900">The challenge</dt>
-                      <dd className="mt-2 text-sm leading-relaxed text-gray-600">
+                    <div className="rounded-xl bg-gray-50 p-5 dark:bg-white/[0.045]">
+                      <dt className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                        The challenge
+                      </dt>
+                      <dd className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                         {selectedProject.challenge}
                       </dd>
                     </div>
-                    <div className="rounded-xl bg-gray-50 p-5">
-                      <dt className="text-sm font-bold text-gray-900">What I built</dt>
-                      <dd className="mt-2 text-sm leading-relaxed text-gray-600">
+                    <div className="rounded-xl bg-gray-50 p-5 dark:bg-white/[0.045]">
+                      <dt className="text-sm font-bold text-gray-900 dark:text-gray-100">
+                        What I built
+                      </dt>
+                      <dd className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                         {selectedProject.solution}
                       </dd>
                     </div>
-                    <div className="rounded-xl bg-teal-50 p-5">
-                      <dt className="text-sm font-bold text-teal-900">Working result</dt>
-                      <dd className="mt-2 text-sm leading-relaxed text-teal-900/80">
+                    <div className="rounded-xl bg-teal-50 p-5 dark:bg-teal-300/10">
+                      <dt className="text-sm font-bold text-teal-900 dark:text-teal-200">
+                        Working result
+                      </dt>
+                      <dd className="mt-2 text-sm leading-relaxed text-teal-900/80 dark:text-teal-100/70">
                         {selectedProject.result}
                       </dd>
                     </div>
-                    <div className="rounded-xl bg-teal-50 p-5">
-                      <dt className="text-sm font-bold text-teal-900">Operational value</dt>
-                      <dd className="mt-2 text-sm leading-relaxed text-teal-900/80">
+                    <div className="rounded-xl bg-teal-50 p-5 dark:bg-teal-300/10">
+                      <dt className="text-sm font-bold text-teal-900 dark:text-teal-200">
+                        Operational value
+                      </dt>
+                      <dd className="mt-2 text-sm leading-relaxed text-teal-900/80 dark:text-teal-100/70">
                         {selectedProject.value}
                       </dd>
                     </div>
                   </dl>
 
-                  <div className="mt-6 border-t border-gray-200 pt-5 text-sm text-gray-600">
+                  <div className="mt-6 border-t border-gray-200 pt-5 text-sm text-gray-600 dark:border-teal-100/10 dark:text-gray-400">
                     <p>
-                      <span className="font-bold text-gray-900">My role:</span>{' '}
+                      <span className="font-bold text-gray-900 dark:text-gray-100">My role:</span>{' '}
                       {selectedProject.role}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {selectedProject.technologies.map((technology) => (
                         <span
                           key={technology}
-                          className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700"
+                          className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700 dark:bg-white/[0.065] dark:text-gray-300"
                         >
                           {technology}
                         </span>
@@ -282,7 +294,7 @@ export default function Projects() {
                       href={selectedProject.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-accent hover:bg-accent-hover mt-6 inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-bold text-white transition-colors"
+                      className="bg-accent hover:bg-accent-hover mt-6 inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-bold text-white transition-colors dark:bg-teal-400 dark:text-teal-950 dark:hover:bg-teal-300"
                     >
                       Visit project
                       <ArrowTopRightOnSquareIcon aria-hidden="true" className="h-4 w-4" />
@@ -290,14 +302,17 @@ export default function Projects() {
                   )}
 
                   {selectedProject.images?.length > 0 && (
-                    <p className="mt-5 text-center text-sm text-gray-500" aria-live="polite">
+                    <p
+                      className="mt-5 text-center text-sm text-gray-500 dark:text-gray-500"
+                      aria-live="polite"
+                    >
                       Screenshot {currentImageIndex + 1} of {selectedProject.images.length}
                     </p>
                   )}
                 </div>
 
                 {selectedProject.images?.length > 1 && (
-                  <div className="flex max-w-full justify-start gap-2 overflow-x-auto border-t border-gray-200 p-4 sm:justify-center">
+                  <div className="flex max-w-full justify-start gap-2 overflow-x-auto border-t border-gray-200 p-4 sm:justify-center dark:border-teal-100/10">
                     {selectedProject.images.map((image, index) => (
                       <button
                         key={image}
@@ -307,8 +322,8 @@ export default function Projects() {
                         aria-current={index === currentImageIndex ? 'true' : undefined}
                         className={`h-16 w-16 shrink-0 overflow-hidden rounded border-2 transition-all ${
                           index === currentImageIndex
-                            ? 'scale-105 border-teal-600'
-                            : 'border-gray-200 opacity-60 hover:opacity-100'
+                            ? 'scale-105 border-teal-600 dark:border-teal-300'
+                            : 'border-gray-200 opacity-60 hover:opacity-100 dark:border-gray-700'
                         }`}
                       >
                         <img

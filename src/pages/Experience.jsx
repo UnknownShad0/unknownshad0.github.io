@@ -19,7 +19,7 @@ function TimelineItem({ item, isLast }) {
       {!isLast && (
         <div
           aria-hidden="true"
-          className="absolute top-5 -bottom-5 left-4 w-0.5 -translate-x-1/2 bg-gray-300"
+          className="absolute top-5 -bottom-5 left-4 w-0.5 -translate-x-1/2 bg-gray-300 dark:bg-teal-800/70"
         />
       )}
 
@@ -27,19 +27,27 @@ function TimelineItem({ item, isLast }) {
         aria-hidden="true"
         className="relative z-10 mt-1 flex h-8 w-8 shrink-0 items-center justify-center"
       >
-        <span className="bg-accent h-3 w-3 rounded-full ring-4 ring-white" />
+        <span className="bg-accent h-3 w-3 rounded-full ring-4 ring-white dark:bg-teal-300 dark:ring-[#0b1714]" />
       </div>
 
       <Motion.article variants={timelineItemVariant} className="ml-3 min-w-0 flex-1 pb-8 sm:ml-6">
         <div
           data-mouse-tilt
-          className="rounded-2xl bg-white p-4 shadow will-change-transform sm:p-6"
+          className="rounded-2xl bg-white p-4 shadow will-change-transform sm:p-6 dark:bg-white/[0.045] dark:ring-1 dark:shadow-black/20 dark:ring-white/5"
         >
-          <h3 className="mt-2 font-semibold text-gray-800">{item.institution}</h3>
-          {item.title && <p className="mt-2 text-sm leading-relaxed text-gray-800">{item.title}</p>}
-          <p className="mt-2 text-sm leading-relaxed font-semibold text-gray-800">{item.year}</p>
+          <h3 className="mt-2 font-semibold text-gray-800 dark:text-gray-100">
+            {item.institution}
+          </h3>
+          {item.title && (
+            <p className="mt-2 text-sm leading-relaxed text-gray-800 dark:text-gray-300">
+              {item.title}
+            </p>
+          )}
+          <p className="mt-2 text-sm leading-relaxed font-semibold text-gray-800 dark:text-teal-200">
+            {item.year}
+          </p>
           {item.description && (
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-600">
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
               {item.description.map((description) => (
                 <li key={description}>{description}</li>
               ))}
@@ -77,10 +85,10 @@ export default function Experience() {
       <SectionHeading className="mb-12">Education and Career</SectionHeading>
 
       <div className="mx-auto mt-8">
-        <div className="grid grid-cols-1 rounded-3xl border border-gray-200 bg-white p-4 shadow-2xl sm:p-8 md:grid-cols-2 md:gap-10">
+        <div className="grid grid-cols-1 rounded-3xl border border-gray-200 bg-white p-4 shadow-2xl sm:p-8 md:grid-cols-2 md:gap-10 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30">
           <div className="mb-12 md:mb-0">
             <div className="mb-8 flex justify-center text-4xl lg:justify-start">
-              <div className="rounded-2xl bg-gray-50 p-5">
+              <div className="rounded-2xl bg-gray-50 p-5 dark:bg-teal-300/10 dark:text-teal-200">
                 <span className="sr-only">Education</span>
                 <FaGraduationCap aria-hidden="true" />
               </div>
@@ -90,7 +98,7 @@ export default function Experience() {
 
           <div>
             <div className="mb-8 flex justify-center text-3xl lg:justify-start">
-              <div className="rounded-2xl bg-gray-50 p-5">
+              <div className="rounded-2xl bg-gray-50 p-5 dark:bg-teal-300/10 dark:text-teal-200">
                 <span className="sr-only">Career</span>
                 <FaBriefcase aria-hidden="true" />
               </div>
