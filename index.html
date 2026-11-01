@@ -8,7 +8,25 @@
     <meta property="og:image" content="https://unknownshad0.github.io/jm.png" />
     <meta name="twitter:card" content="summary" />
     <meta name="description" content="Web developer portfolio of John Mark Anunciado." />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#f5f8f7" />
+    <script>
+      (() => {
+        let savedTheme;
+
+        try {
+          savedTheme = localStorage.getItem('portfolio-theme');
+        } catch {}
+
+        const mode = ['light', 'dark'].includes(savedTheme) ? savedTheme : 'auto';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const isDark = mode === 'dark' || (mode === 'auto' && prefersDark);
+
+        document.documentElement.classList.toggle('dark', isDark);
+        document.documentElement.dataset.theme = mode;
+        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+        document.querySelector('meta[name="theme-color"]').content = isDark ? '#07110f' : '#f5f8f7';
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="./jm.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,10 +36,10 @@
     />
 
     <title>Anunciado Portfolio</title>
-    <script type="module" crossorigin src="./assets/index-CWqs5t4s.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-DKcnFPj-.css">
+    <script type="module" crossorigin src="./assets/index-DV1nqUjk.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-VSM2GLqI.css">
   </head>
-  <body class="bg-white">
+  <body>
     <div id="root"></div>
   </body>
 </html>
