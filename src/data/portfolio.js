@@ -32,7 +32,7 @@ export const EDUCATION = [
 
 export const CAREER = [
   {
-    year: 'Oct 2024 - Present',
+    year: 'Oct 2024 - Sept 2026',
     title: 'Web Developer',
     institution: 'Clearmind Algorithmics Inc.',
     description: [
@@ -68,7 +68,7 @@ export const PROJECTS = [
     company: 'Tolit’s Butcheron',
     year: '2026',
     category: 'Hobby project',
-    workType: 'Full-stack league management',
+    // workType: 'Full-stack league management',
     link: 'https://tolits-butcheron.vercel.app/',
     thumbnail: tolitsBasketballImage,
     images: [tolitsBasketballImage],
