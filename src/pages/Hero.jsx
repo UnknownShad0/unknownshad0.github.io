@@ -23,7 +23,7 @@ export default function Hero() {
         className="relative max-w-4xl px-6 py-20 sm:px-10 sm:py-28 lg:px-16 lg:py-36"
       >
         <p className="text-accent mb-5 text-sm font-bold tracking-[0.2em] uppercase dark:text-teal-300">
-          John Mark Anunciado · Web Developer
+          John Mark Anunciado <span className="text-accent hidden lg:inline">-</span> <span className="block lg:inline">Web Developer</span>
         </p>
         <h1 className="font-play text-4xl leading-tight font-bold sm:text-6xl lg:text-7xl">
           I build web systems that turn manual work into clear, reliable workflows.

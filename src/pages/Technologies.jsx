@@ -39,59 +39,65 @@ import { SKILLS } from '../data/portfolio';
 import { MOTION_VARIANTS, DEFAULT_VIEWPORT, EASE_OUT } from '../config/motion';
 
 const iconMap = {
-  HTML: <FaHtml5 className="text-gray-950 dark:text-teal-200" />,
-  Docker: <FaDocker className="text-gray-950 dark:text-teal-200" />,
-  CSS: <FaCss3Alt className="text-gray-950 dark:text-teal-200" />,
-  React: <FaReact className="text-gray-950 dark:text-teal-200" />,
-  JavaScript: <SiJavascript className="text-gray-950 dark:text-teal-200" />,
-  'Tailwind CSS': <SiTailwindcss className="text-gray-950 dark:text-teal-200" />,
-  Bootstrap: <FaBootstrap className="text-gray-950 dark:text-teal-200" />,
-  Laravel: <FaLaravel className="text-gray-950 dark:text-teal-200" />,
-  PHP: <FaPhp className="text-gray-950 dark:text-teal-200" />,
-  SQL: <FaDatabase className="text-gray-950 dark:text-teal-200" />,
-  Git: <SiGit className="text-gray-950 dark:text-teal-200" />,
-  'REST API': <TbApi className="text-gray-950 dark:text-teal-200" />,
-  Postman: <SiPostman className="text-gray-950 dark:text-teal-200" />,
-  Vite: <SiVite className="text-gray-950 dark:text-teal-200" />,
-  'Terminal/SSH': <FaTerminal className="text-gray-950 dark:text-teal-200" />,
-  Figma: <FaFigma className="text-gray-950 dark:text-teal-200" />,
-  'Next.js': <SiNextdotjs className="text-gray-950 dark:text-teal-200" />,
-  CodeIgniter: <SiCodeigniter className="text-gray-950 dark:text-teal-200" />,
-  Firebase: <SiFirebase className="text-gray-950 dark:text-teal-200" />,
-  GitHub: <FaGithub className="text-gray-950 dark:text-teal-200" />,
-  'Google Analytics': <SiGoogleanalytics className="text-gray-950 dark:text-teal-200" />,
-  'VPS Deployment': <FaServer className="text-gray-950 dark:text-teal-200" />,
-  TypeScript: <SiTypescript className="text-gray-950 dark:text-teal-200" />,
-  'Kiro CLI': <FaTerminal className="text-gray-950 dark:text-teal-200" />,
-  'Claude AI': <SiClaude className="text-gray-950 dark:text-teal-200" />,
-  Ollama: <SiOllama className="text-gray-950 dark:text-teal-200" />,
-  Codex: <SiOpenai className="text-gray-950 dark:text-teal-200" />,
-  ChatGPT: <SiOpenai className="text-gray-950 dark:text-teal-200" />,
-  Gemini: <SiGooglegemini className="text-gray-950 dark:text-teal-200" />,
-  Laragon: <SiLaragon className="text-gray-950 dark:text-teal-200" />,
-  XAMPP: <SiXampp className="text-gray-950 dark:text-teal-200" />,
-  Vercel: <SiVercel className="text-gray-950 dark:text-teal-200" />,
-  Render: <SiRender className="text-gray-950 dark:text-teal-200" />,
+  HTML: FaHtml5,
+  Docker: FaDocker,
+  CSS: FaCss3Alt,
+  React: FaReact,
+  JavaScript: SiJavascript,
+  'Tailwind CSS': SiTailwindcss,
+  Bootstrap: FaBootstrap,
+  Laravel: FaLaravel,
+  PHP: FaPhp,
+  SQL: FaDatabase,
+  Git: SiGit,
+  'REST API': TbApi,
+  Postman: SiPostman,
+  Vite: SiVite,
+  'Terminal/SSH': FaTerminal,
+  Figma: FaFigma,
+  'Next.js': SiNextdotjs,
+  CodeIgniter: SiCodeigniter,
+  Firebase: SiFirebase,
+  GitHub: FaGithub,
+  'Google Analytics': SiGoogleanalytics,
+  'VPS Deployment': FaServer,
+  TypeScript: SiTypescript,
+  'Kiro CLI': FaTerminal,
+  'Claude AI': SiClaude,
+  Ollama: SiOllama,
+  Codex: SiOpenai,
+  ChatGPT: SiOpenai,
+  Gemini: SiGooglegemini,
+  Laragon: SiLaragon,
+  XAMPP: SiXampp,
+  Vercel: SiVercel,
+  Render: SiRender,
 };
 
 const capabilityGroups = [
-  { key: 'frontend', title: 'Frontend', variant: MOTION_VARIANTS.slideLeft },
-  { key: 'backend', title: 'Backend', variant: MOTION_VARIANTS.fade },
-  { key: 'ai', title: 'AI Tools', variant: MOTION_VARIANTS.slideRight },
-  { key: 'tools', title: 'Development Tools', variant: MOTION_VARIANTS.slideLeft },
-  { key: 'platforms', title: 'Platforms & Deployment', variant: MOTION_VARIANTS.slideRight },
+  { key: 'frontend', title: 'Frontend' },
+  { key: 'backend', title: 'Backend' },
+  { key: 'ai', title: 'AI tools' },
+  { key: 'tools', title: 'Development tools' },
+  { key: 'platforms', title: 'Platforms and deployment' },
 ];
 
 export default function Technologies() {
-  const renderSkill = (skill) => (
-    <div
-      key={skill}
-      className="flex items-center justify-center gap-2 rounded-xl bg-white p-4 text-center text-3xl font-medium dark:bg-white/[0.035]"
-    >
-      {iconMap[skill]}
-      <span className="text-xs text-black dark:text-gray-300">{skill}</span>
-    </div>
-  );
+  const renderSkill = (skill) => {
+    const Icon = iconMap[skill];
+
+    return (
+      <li key={skill} className="flex items-center gap-2.5 py-1.5 text-sm">
+        {Icon && (
+          <Icon
+            aria-hidden="true"
+            className="h-4 w-4 shrink-0 text-gray-700 dark:text-teal-200"
+          />
+        )}
+        <span className="text-gray-800 dark:text-gray-300">{skill}</span>
+      </li>
+    );
+  };
 
   return (
     <section id="technologies" className="p-4">
@@ -100,26 +106,20 @@ export default function Technologies() {
         The tools I use to turn requirements into responsive interfaces, connected workflows, and
         maintainable web applications.
       </p>
-      <div className="mx-auto mt-8 flex flex-wrap justify-center gap-6 rounded-3xl border border-gray-200 bg-white p-5 text-center shadow-2xl sm:p-8 lg:p-10 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30">
+      <div className="mx-auto mt-8 grid gap-x-10 gap-y-10 rounded-3xl border border-gray-200 bg-white p-5 shadow-2xl sm:grid-cols-2 sm:p-8 lg:grid-cols-5 lg:p-10 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30">
         {capabilityGroups.map((group) => (
           <Motion.div
             key={group.key}
-            variants={group.variant}
+            variants={MOTION_VARIANTS.fade}
             initial="hidden"
             whileInView="visible"
             viewport={DEFAULT_VIEWPORT}
-            transition={{ duration: 0.55, ease: EASE_OUT }}
-            className="group w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            transition={{ duration: 0.5, ease: EASE_OUT }}
           >
-            <div
-              data-mouse-tilt
-              className="relative h-full overflow-hidden rounded-3xl border border-gray-200 bg-white p-4 shadow transition-shadow duration-300 will-change-transform group-hover:shadow-xl sm:p-5 dark:border-teal-100/10 dark:bg-[#0e1c18] dark:shadow-black/20 dark:group-hover:shadow-black/40"
-            >
-              <h3 className="mb-5 text-lg font-semibold lg:text-2xl">{group.title}</h3>
-              <div className="grid grid-cols-1 gap-1 font-mono sm:grid-cols-2">
-                {SKILLS[group.key].map(renderSkill)}
-              </div>
-            </div>
+            <h3 className=" pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50">
+              {group.title}
+            </h3>
+            <ul className="mt-3">{SKILLS[group.key].map(renderSkill)}</ul>
           </Motion.div>
         ))}
       </div>

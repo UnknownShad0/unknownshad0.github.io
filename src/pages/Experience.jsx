@@ -1,81 +1,55 @@
-import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import { motion as Motion } from 'framer-motion';
 import { SectionHeading } from '../components';
 import { CAREER, EDUCATION } from '../data/portfolio';
 import { DEFAULT_VIEWPORT, EASE_OUT, STAGGER_VARIANTS } from '../config/motion';
 
 const timelineItemVariant = {
-  hidden: { opacity: 0, x: 36 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, ease: EASE_OUT },
+    y: 0,
+    transition: { duration: 0.4, ease: EASE_OUT },
   },
 };
 
-function TimelineItem({ item, isLast }) {
+function TimelineItem({ item }) {
   return (
-    <div className="relative flex items-start">
-      {!isLast && (
-        <div
-          aria-hidden="true"
-          className="absolute top-5 -bottom-5 left-4 w-0.5 -translate-x-1/2 bg-gray-300 dark:bg-teal-800/70"
-        />
-      )}
-
-      <div
+    <Motion.li variants={timelineItemVariant} className="relative pb-8 pl-6 last:pb-0">
+      <span
         aria-hidden="true"
-        className="relative z-10 mt-1 flex h-8 w-8 shrink-0 items-center justify-center"
-      >
-        <span className="bg-accent h-3 w-3 rounded-full ring-4 ring-white dark:bg-teal-300 dark:ring-[#0b1714]" />
-      </div>
-
-      <Motion.article variants={timelineItemVariant} className="ml-3 min-w-0 flex-1 pb-8 sm:ml-6">
-        <div
-          data-mouse-tilt
-          className="rounded-2xl bg-white p-4 shadow will-change-transform sm:p-6 dark:bg-white/[0.045] dark:ring-1 dark:shadow-black/20 dark:ring-white/5"
-        >
-          <h3 className="mt-2 font-semibold text-gray-800 dark:text-gray-100">
-            {item.institution}
-          </h3>
-          {item.title && (
-            <p className="mt-2 text-sm leading-relaxed text-gray-800 dark:text-gray-300">
-              {item.title}
-            </p>
-          )}
-          <p className="mt-2 text-sm leading-relaxed font-semibold text-gray-800 dark:text-teal-200">
-            {item.year}
-          </p>
-          {item.description && (
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-              {item.description.map((description) => (
-                <li key={description}>{description}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </Motion.article>
-    </div>
+        className="absolute top-[5px] -left-[5.5px] h-2.5 w-2.5 rounded-full bg-gray-400 dark:bg-gray-500"
+      />
+      <p className="text-sm text-gray-500 dark:text-gray-400">{item.year}</p>
+      <h4 className="mt-1 font-semibold text-gray-900 dark:text-gray-100">{item.institution}</h4>
+      {item.title && (
+        <p className="mt-1 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+          {item.title}
+        </p>
+      )}
+      {item.description && (
+        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+          {item.description.map((description) => (
+            <li key={description}>{description}</li>
+          ))}
+        </ul>
+      )}
+    </Motion.li>
   );
 }
 
 function Timeline({ items }) {
   return (
-    <Motion.div
+    <Motion.ol
       variants={STAGGER_VARIANTS}
       initial="hidden"
       whileInView="visible"
       viewport={DEFAULT_VIEWPORT}
-      className="space-y-0"
+      className="ml-1 border-l border-gray-300 dark:border-white/15"
     >
-      {items.map((item, index) => (
-        <TimelineItem
-          key={`${item.institution}-${item.year}`}
-          item={item}
-          isLast={index === items.length - 1}
-        />
+      {items.map((item) => (
+        <TimelineItem key={`${item.institution}-${item.year}`} item={item} />
       ))}
-    </Motion.div>
+    </Motion.ol>
   );
 }
 
@@ -84,27 +58,19 @@ export default function Experience() {
     <section id="career" className="p-4">
       <SectionHeading className="mb-12">Education and Career</SectionHeading>
 
-      <div className="mx-auto mt-8">
-        <div className="grid grid-cols-1 rounded-3xl border border-gray-200 bg-white p-4 shadow-2xl sm:p-8 md:grid-cols-2 md:gap-10 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30">
-          <div className="mb-12 md:mb-0">
-            <div className="mb-8 flex justify-center text-4xl lg:justify-start">
-              <div className="rounded-2xl bg-gray-50 p-5 dark:bg-teal-300/10 dark:text-teal-200">
-                <span className="sr-only">Education</span>
-                <FaGraduationCap aria-hidden="true" />
-              </div>
-            </div>
-            <Timeline items={EDUCATION} />
-          </div>
+      <div className="mx-auto mt-8 grid max-w-5xl gap-12 md:grid-cols-2 md:gap-16">
+        <div>
+          <h3 className="mb-6 border-t border-gray-300 pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50">
+            Education
+          </h3>
+          <Timeline items={EDUCATION} />
+        </div>
 
-          <div>
-            <div className="mb-8 flex justify-center text-3xl lg:justify-start">
-              <div className="rounded-2xl bg-gray-50 p-5 dark:bg-teal-300/10 dark:text-teal-200">
-                <span className="sr-only">Career</span>
-                <FaBriefcase aria-hidden="true" />
-              </div>
-            </div>
-            <Timeline items={CAREER} />
-          </div>
+        <div>
+          <h3 className="mb-6 border-t border-gray-300 pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50">
+            Career
+          </h3>
+          <Timeline items={CAREER} />
         </div>
       </div>
     </section>

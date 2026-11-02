@@ -76,7 +76,7 @@ export default function Certifications() {
         aria-label="Certifications"
         tabIndex={0}
         onKeyDown={handleCarouselKeyDown}
-        className="mx-auto mt-8 rounded-3xl border border-gray-200 bg-white p-4 shadow-2xl sm:p-6 lg:p-8 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30"
+        className="mx-auto mt-8 max-w-5xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-teal-600 dark:focus-visible:outline-teal-300"
       >
         <div className="overflow-hidden">
           <AnimatePresence initial={false} mode="wait" custom={direction}>
@@ -96,7 +96,7 @@ export default function Certifications() {
               onTap={() => openCertificate(activeCertificate)}
               aria-roledescription="slide"
               aria-label={`${activeCertificate.title}, certificate ${activeIndex + 1} of ${CERTIFICATIONS.length}.`}
-              className="group mx-auto block w-full cursor-grab overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-md active:cursor-grabbing sm:p-3 lg:w-10/12 xl:w-4/5 dark:border-teal-100/10 dark:bg-white/5 dark:shadow-black/25"
+              className="mx-auto block w-full cursor-grab active:cursor-grabbing lg:w-10/12 xl:w-4/5"
             >
               <img
                 src={activeCertificate.image}
@@ -105,29 +105,27 @@ export default function Certifications() {
                 height="1190"
                 loading="lazy"
                 decoding="async"
-                className="block h-auto w-full rounded-xl object-contain transition-transform duration-300 group-hover:scale-[1.01]"
+                className="block h-auto w-full rounded border border-gray-200 object-contain dark:border-white/10"
               />
             </Motion.button>
           </AnimatePresence>
         </div>
 
-        {/* <p className="mt-4 text-center font-semibold text-gray-900">{activeCertificate.title}</p> */}
-
-        <div className="mt-5 flex items-center justify-between gap-4">
+        <div className="mt-6 flex items-center justify-between gap-4">
           <button
             type="button"
             onClick={() => changeSlide(-1)}
-            className="rounded-full border border-gray-200 bg-white p-2.5 text-gray-700 shadow-sm transition-all duration-300 hover:-translate-x-0.5 hover:bg-gray-50 dark:border-teal-100/10 dark:bg-white/5 dark:text-gray-200 dark:hover:bg-white/10"
+            className="rounded border border-gray-300 p-2 text-gray-700 transition-colors hover:bg-gray-100 dark:border-white/15 dark:text-gray-200 dark:hover:bg-white/10"
             aria-label="Previous certificate"
           >
             <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
           </button>
 
-          <div className="flex flex-col items-center gap-3">
+          <div className="flex flex-col items-center gap-2">
             <p className="text-sm text-gray-600 dark:text-gray-400" aria-live="polite">
               {activeIndex + 1} / {CERTIFICATIONS.length}
             </p>
-            <div className="flex items-center gap-2" role="group" aria-label="Choose a certificate">
+            <div className="flex items-center" role="group" aria-label="Choose a certificate">
               {CERTIFICATIONS.map((certificate, index) => (
                 <button
                   key={certificate.id}
@@ -135,13 +133,13 @@ export default function Certifications() {
                   onClick={() => goToSlide(index)}
                   aria-label={`Show ${certificate.title}`}
                   aria-current={index === activeIndex ? 'true' : undefined}
-                  className="group flex h-8 w-8 items-center justify-center rounded-full"
+                  className="group flex h-8 w-6 items-center justify-center"
                 >
                   <span
-                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                    className={`h-2 w-2 rounded-full transition-colors ${
                       index === activeIndex
-                        ? 'bg-accent w-8 dark:bg-teal-300'
-                        : 'w-2.5 bg-gray-300 group-hover:bg-gray-400 dark:bg-gray-700 dark:group-hover:bg-gray-500'
+                        ? 'bg-gray-900 dark:bg-gray-100'
+                        : 'bg-gray-300 group-hover:bg-gray-400 dark:bg-gray-700 dark:group-hover:bg-gray-500'
                     }`}
                   />
                 </button>
@@ -152,7 +150,7 @@ export default function Certifications() {
           <button
             type="button"
             onClick={() => changeSlide(1)}
-            className="rounded-full border border-gray-200 bg-white p-2.5 text-gray-700 shadow-sm transition-all duration-300 hover:translate-x-0.5 hover:bg-gray-50 dark:border-teal-100/10 dark:bg-white/5 dark:text-gray-200 dark:hover:bg-white/10"
+            className="rounded border border-gray-300 p-2 text-gray-700 transition-colors hover:bg-gray-100 dark:border-white/15 dark:text-gray-200 dark:hover:bg-white/10"
             aria-label="Next certificate"
           >
             <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
@@ -176,10 +174,10 @@ export default function Certifications() {
                 <button
                   type="button"
                   onClick={closeCertificate}
-                  className="absolute top-2 right-2 rounded-full bg-white/90 p-1 text-gray-700 shadow transition-colors hover:text-black dark:bg-[#10201c]/90 dark:text-gray-200 dark:hover:text-white"
+                  className="absolute top-2 right-2 rounded bg-black/60 p-1.5 text-white transition-colors hover:bg-black/80"
                   aria-label="Close certificate"
                 >
-                  <XMarkIcon aria-hidden="true" className="h-7 w-7" />
+                  <XMarkIcon aria-hidden="true" className="h-6 w-6" />
                 </button>
                 <img
                   src={selectedCertificate.image}
