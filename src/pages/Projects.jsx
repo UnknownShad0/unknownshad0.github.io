@@ -9,9 +9,18 @@ import {
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { SectionHeading } from '../components';
 import { PROJECTS } from '../data/portfolio';
-import { DIALOG_TRANSITION } from '../config/motion';
+import {
+  DIALOG_TRANSITION,
+  EASE_OUT,
+  getResponsiveViewport,
+  getRevealTransition,
+  getSlideUpVariants,
+  scaleMotionTime,
+  useIsDesktop,
+} from '../config/motion';
 
 export default function Projects() {
+  const isDesktop = useIsDesktop();
   const [selectedProject, setSelectedProject] = useState(null);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -58,13 +67,36 @@ export default function Projects() {
   const supportingProjects = PROJECTS.filter(
     (project) => project.category !== 'Professional work' && project.category !== 'Deployed project'
   );
-
-  const renderProject = (project) => {
+  const viewport = getResponsiveViewport(isDesktop);
+  const projectListVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: scaleMotionTime(isDesktop ? 0.08 : 0.05),
+      },
+    },
+  };
+  const renderProject = (project, index) => {
     const meta = [project.year ?? project.category, project.workType].filter(Boolean).join(' · ');
+    const entersFromLeft = index % 2 === 0;
+    const projectCardVariants = {
+      hidden: {
+        opacity: 0,
+        x: isDesktop ? (entersFromLeft ? -32 : 32) : 0,
+        y: isDesktop ? 0 : 12,
+      },
+      visible: {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: getRevealTransition(isDesktop),
+      },
+    };
 
     return (
-      <button
+      <Motion.button
         key={project.id}
+        variants={projectCardVariants}
         type="button"
         onClick={() => openGallery(project)}
         className="group block w-full text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-600 dark:focus-visible:outline-teal-300"
@@ -102,34 +134,60 @@ export default function Projects() {
           <span className="font-semibold text-gray-900 dark:text-gray-100">Result:</span>{' '}
           {project.value}
         </p>
-      </button>
+      </Motion.button>
     );
   };
 
   return (
     <section id="projects" className="p-4">
       <SectionHeading>Selected Work</SectionHeading>
-      <p className="mx-auto mt-5 max-w-2xl text-center leading-relaxed text-gray-600 dark:text-gray-400">
+      <Motion.p
+        variants={getSlideUpVariants(isDesktop, 18, 8)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+        transition={getRevealTransition(isDesktop, isDesktop ? 0.06 : 0.03)}
+        className="mx-auto mt-5 max-w-2xl text-center leading-relaxed text-gray-600 dark:text-gray-400"
+      >
         Professional work first, followed by selected academic projects. Each case study covers the
         problem, what I did, and what changed as a result.
-      </p>
+      </Motion.p>
 
       <div className="mx-auto mt-12 max-w-5xl">
         {/* <h3 className="border-t border-gray-300 pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50">
           Professional projects
         </h3> */}
-        <div className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2">
+        <Motion.div
+          variants={projectListVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2"
+        >
           {professionalProjects.map(renderProject)}
-        </div>
+        </Motion.div>
 
         {supportingProjects.length > 0 && (
           <>
-            <h3 className="mt-16 border-t border-gray-300 pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50">
+            <Motion.h3
+              variants={getSlideUpVariants(isDesktop, 18, 8)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+              transition={getRevealTransition(isDesktop)}
+              className="mt-16 border-t border-gray-300 pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50"
+            >
               Supporting projects
-            </h3>
-            <div className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2">
+            </Motion.h3>
+            <Motion.div
+              variants={projectListVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+              className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2"
+            >
               {supportingProjects.map(renderProject)}
-            </div>
+            </Motion.div>
           </>
         )}
       </div>
@@ -185,9 +243,15 @@ export default function Projects() {
                           loading="lazy"
                           decoding="async"
                           custom={direction}
-                          initial={(nextDirection) => ({ opacity: 0, x: nextDirection * 28 })}
+                          initial={(nextDirection) => ({
+                            opacity: 0,
+                            x: nextDirection * (isDesktop ? 28 : 12),
+                          })}
                           animate={{ opacity: 1, x: 0 }}
-                          exit={(nextDirection) => ({ opacity: 0, x: nextDirection * -28 })}
+                          exit={(nextDirection) => ({
+                            opacity: 0,
+                            x: nextDirection * (isDesktop ? -28 : -12),
+                          })}
                           transition={DIALOG_TRANSITION}
                           className="h-auto max-h-[75vh] w-full bg-black/20 object-contain"
                         />

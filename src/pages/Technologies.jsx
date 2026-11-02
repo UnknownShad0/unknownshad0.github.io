@@ -36,7 +36,14 @@ import { TbApi } from 'react-icons/tb';
 import { motion as Motion } from 'framer-motion';
 import { SectionHeading } from '../components';
 import { SKILLS } from '../data/portfolio';
-import { MOTION_VARIANTS, DEFAULT_VIEWPORT, EASE_OUT } from '../config/motion';
+import {
+  EASE_OUT,
+  getResponsiveViewport,
+  getRevealTransition,
+  getSlideUpVariants,
+  scaleMotionTime,
+  useIsDesktop,
+} from '../config/motion';
 
 const iconMap = {
   HTML: FaHtml5,
@@ -83,6 +90,32 @@ const capabilityGroups = [
 ];
 
 export default function Technologies() {
+  const isDesktop = useIsDesktop();
+  const viewport = getResponsiveViewport(isDesktop);
+  const mobileGroupVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0 },
+  };
+  const desktopPanelVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: scaleMotionTime(0.45),
+        ease: EASE_OUT,
+        staggerChildren: scaleMotionTime(0.08),
+      },
+    },
+  };
+  const desktopGroupVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: scaleMotionTime(0.48), ease: EASE_OUT },
+    },
+  };
+
   const renderSkill = (skill) => {
     const Icon = iconMap[skill];
 
@@ -102,20 +135,27 @@ export default function Technologies() {
   return (
     <section id="technologies" className="p-4">
       <SectionHeading>Capabilities</SectionHeading>
-      <p className="mx-auto mt-5 max-w-2xl px-2 text-center text-sm leading-relaxed text-gray-600 sm:px-0 sm:text-base dark:text-gray-400">
+      <Motion.p
+        variants={getSlideUpVariants(isDesktop, 18, 8)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+        transition={getRevealTransition(isDesktop, isDesktop ? 0.06 : 0.03)}
+        className="mx-auto mt-5 max-w-2xl px-2 text-center text-sm leading-relaxed text-gray-600 sm:px-0 sm:text-base dark:text-gray-400"
+      >
         The tools I use to turn requirements into responsive interfaces, connected workflows, and
         maintainable web applications.
-      </p>
+      </Motion.p>
 
       <div className="mx-auto mt-8 max-w-2xl space-y-8 md:hidden">
         {capabilityGroups.map((group) => (
           <Motion.div
             key={group.key}
-            variants={MOTION_VARIANTS.fade}
+            variants={mobileGroupVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={DEFAULT_VIEWPORT}
-            transition={{ duration: 0.4, ease: EASE_OUT }}
+            viewport={getResponsiveViewport(false)}
+            transition={{ duration: scaleMotionTime(0.36), ease: EASE_OUT }}
             className="min-w-0"
           >
             <h3 className="border-t border-gray-300 pt-3 text-lg font-medium text-gray-900 dark:border-white/15 dark:text-gray-50">
@@ -128,24 +168,22 @@ export default function Technologies() {
         ))}
       </div>
 
-      <div className="mx-auto mt-8 hidden max-w-7xl gap-x-10 gap-y-10 rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl md:grid md:grid-cols-3 lg:grid-cols-5 lg:p-10 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30">
+      <Motion.div
+        variants={desktopPanelVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={getResponsiveViewport(true)}
+        className="mx-auto mt-8 hidden max-w-7xl gap-x-10 gap-y-10 rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl md:grid md:grid-cols-3 lg:grid-cols-5 lg:p-10 dark:border-teal-100/10 dark:bg-[#0b1714] dark:shadow-black/30"
+      >
         {capabilityGroups.map((group) => (
-          <Motion.div
-            key={group.key}
-            variants={MOTION_VARIANTS.fade}
-            initial="hidden"
-            whileInView="visible"
-            viewport={DEFAULT_VIEWPORT}
-            transition={{ duration: 0.5, ease: EASE_OUT }}
-            className="min-w-0"
-          >
+          <Motion.div key={group.key} variants={desktopGroupVariants} className="min-w-0">
             <h3 className="border-b border-gray-200 pb-2 text-base font-semibold text-gray-900 sm:text-lg dark:border-white/15 dark:text-gray-50">
               {group.title}
             </h3>
             <ul className="mt-2">{SKILLS[group.key].map(renderSkill)}</ul>
           </Motion.div>
         ))}
-      </div>
+      </Motion.div>
     </section>
   );
 }

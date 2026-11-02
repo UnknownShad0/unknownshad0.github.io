@@ -4,21 +4,29 @@ import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { SectionHeading } from '../components';
 import { CERTIFICATIONS } from '../data/portfolio';
-import { DEFAULT_VIEWPORT, EASE_OUT, MOTION_VARIANTS } from '../config/motion';
-
-const slideVariants = {
-  enter: (direction) => ({ opacity: 0, x: direction * 48 }),
-  center: { opacity: 1, x: 0 },
-  exit: (direction) => ({ opacity: 0, x: direction * -48 }),
-};
+import {
+  EASE_OUT,
+  getResponsiveViewport,
+  getRevealTransition,
+  getSlideUpVariants,
+  scaleMotionTime,
+  useIsDesktop,
+} from '../config/motion';
 
 export default function Certifications() {
+  const isDesktop = useIsDesktop();
   const [selectedCertificate, setSelectedCertificate] = useState(null);
   const [isCertificateOpen, setIsCertificateOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
   const activeCertificate = CERTIFICATIONS[activeIndex];
+  const slideDistance = isDesktop ? 28 : 12;
+  const slideVariants = {
+    enter: (nextDirection) => ({ opacity: 0, x: nextDirection * slideDistance }),
+    center: { opacity: 1, x: 0 },
+    exit: (nextDirection) => ({ opacity: 0, x: nextDirection * -slideDistance }),
+  };
 
   const openCertificate = (certificate) => {
     setSelectedCertificate(certificate);
@@ -66,11 +74,11 @@ export default function Certifications() {
       <SectionHeading>Certifications</SectionHeading>
 
       <Motion.div
-        variants={MOTION_VARIANTS.fade}
+        variants={getSlideUpVariants(isDesktop, 22, 12)}
         initial="hidden"
         whileInView="visible"
-        viewport={DEFAULT_VIEWPORT}
-        transition={{ duration: 0.55, ease: EASE_OUT }}
+        viewport={getResponsiveViewport(isDesktop)}
+        transition={getRevealTransition(isDesktop)}
         role="region"
         aria-roledescription="carousel"
         aria-label="Certifications"
@@ -88,7 +96,10 @@ export default function Certifications() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.35, ease: EASE_OUT }}
+              transition={{
+                duration: scaleMotionTime(isDesktop ? 0.35 : 0.25),
+                ease: EASE_OUT,
+              }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.15}

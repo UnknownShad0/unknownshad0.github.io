@@ -1,11 +1,27 @@
 import { ArrowDownTrayIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import { FaGithub } from 'react-icons/fa';
+import { motion as Motion } from 'framer-motion';
 import { NAVIGATION_ITEMS } from '../data/portfolio';
+import {
+  getResponsiveViewport,
+  getRevealTransition,
+  getSlideUpVariants,
+  useIsDesktop,
+} from '../config/motion';
 
 export default function Footer() {
+  const isDesktop = useIsDesktop();
+
   return (
     <footer className="border-t border-gray-200 bg-white/90 backdrop-blur-md dark:border-teal-100/10 dark:bg-[#0b1714]/90">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <Motion.div
+        variants={getSlideUpVariants(isDesktop, 18, 10)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={getResponsiveViewport(isDesktop)}
+        transition={getRevealTransition(isDesktop)}
+        className="mx-auto max-w-7xl px-6 py-12 lg:px-8"
+      >
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Navigation</h3>
@@ -74,7 +90,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-      </div>
+      </Motion.div>
     </footer>
   );
 }
