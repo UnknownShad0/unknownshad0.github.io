@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
-import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowTopRightOnSquareIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 import { AnimatePresence, motion as Motion } from 'framer-motion';
 import { SectionHeading } from '../components';
 import { PROJECTS } from '../data/portfolio';
@@ -277,9 +282,10 @@ export default function Projects() {
                       href={selectedProject.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-accent mt-5 inline-block font-medium underline underline-offset-4 hover:no-underline dark:text-teal-300"
+                      className="text-accent mt-5 inline-flex items-center gap-1.5 font-medium underline underline-offset-4 hover:no-underline dark:text-teal-300"
                     >
-                      Visit project ↗
+                      <span>Visit project</span>
+                      <ArrowTopRightOnSquareIcon aria-hidden="true" className="h-4 w-4" />
                     </a>
                   )}
 
