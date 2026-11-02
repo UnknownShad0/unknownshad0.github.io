@@ -11,7 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { motion as Motion } from 'framer-motion';
-import profile from '../assets/profile.jpg';
+import profile from '../assets/profile.PNG';
 import { SectionHeading } from '../components';
 import { MOTION_VARIANTS, DEFAULT_VIEWPORT, EASE_OUT } from '../config/motion';
 
