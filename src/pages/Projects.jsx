@@ -290,10 +290,7 @@ export default function Projects() {
                   )}
 
                   {selectedProject.images?.length > 0 && (
-                    <p
-                      className="mt-6 text-sm text-gray-500 dark:text-gray-500"
-                      aria-live="polite"
-                    >
+                    <p className="mt-6 text-sm text-gray-500 dark:text-gray-500" aria-live="polite">
                       Screenshot {currentImageIndex + 1} of {selectedProject.images.length}
                     </p>
                   )}

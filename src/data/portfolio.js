@@ -63,13 +63,13 @@ export const CAREER = [
 
 export const PROJECTS = [
   {
-    id: 'tolits-basketball-league',
-    title: 'Tolit’s Basketball League System',
-    company: 'Tolit’s Butcheron',
+    id: 'jmark-basketball-league',
+    title: 'Basketball League System',
+    company: 'Jmark Butcheron',
     year: '2026',
     category: 'Hobby project',
     // workType: 'Full-stack league management',
-    link: 'https://tolits-butcheron.vercel.app/',
+    link: 'https://community-basketball-league.vercel.app/',
     thumbnail: tolitsBasketballImage,
     images: [tolitsBasketballImage],
     headline:
@@ -82,6 +82,8 @@ export const PROJECTS = [
       'Delivered a deployed web application that automatically determines winners and best players while keeping game results, player statistics, and league records connected.',
     value:
       'Gives organizers one place to run game operations and publish results while giving players and the community clear access to schedules, scores, and performance statistics.',
+    disclaimer:
+      'This is an unofficial portfolio project and is not affiliated with, sponsored by, or endorsed by Tolit’s Butcheron. The Tolit’s Butcheron name, logo, and related brand assets belong to their respective owner and are used here only to identify the project concept.',
     role: 'Full-stack developer • League workflows, responsive interface, live scoring tools, admin access, statistics, and API integration',
     technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'REST API'],
   },
